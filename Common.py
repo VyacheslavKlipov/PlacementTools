@@ -1,6 +1,13 @@
 import FreeCAD,FreeCADGui
 
-ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
+import inspect, os.path
+filename = inspect.getframeinfo(inspect.currentframe()).filename
+path     = os.path.dirname(os.path.abspath(filename))
+#FreeCAD.Console.PrintMessage(path)
+
+ICONPATH = path+'/Resources/icons/'
+
+#ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
 
 def upperObject(obj):
 	if obj.Module=="PartDesign":
