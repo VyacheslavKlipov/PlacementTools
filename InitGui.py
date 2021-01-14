@@ -1,4 +1,3 @@
-# -*- codecs: utf-8 -*-
 #import os
 #from freecad.workbench_starterkit import ICONPATH
 import Part
@@ -7,7 +6,7 @@ import Part
 class PlacementTools (Workbench):
     from Common import ICONPATH
     MenuText = "Placement Tools"
-    #ToolTip = "Placement and allign objects"
+    ToolTip = "Placement and allign Objects"
     #Icon = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/Main.svg' 
     Icon = ICONPATH+'Main.svg' 
 
@@ -20,8 +19,8 @@ class PlacementTools (Workbench):
         self.appendToolbar("Move",["PointToPoint","PointToPointX","PointToPointY","PointToPointZ","Separator","dX","dY","dZ"] ) # creates a new toolbar with your commands
         import Rotation
         self.appendToolbar("Rotation",["rX90","rX_90","rY90","rY_90","rZ90","rZ_90","Separator","rX","rY","rZ"] ) # creates a new toolbar with your commands
-
-        #self.appendToolbar("Allign",["Box"]) # creates a new toolbar with your commands
+		
+        #self.appendToolbar("Test",["Box"]) # creates a new toolbar with your commands
      
   #      self.appendMenu("My New Menu",self.list) # creates a new menu
   #      self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu

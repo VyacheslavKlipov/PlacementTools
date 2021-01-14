@@ -1,4 +1,3 @@
-# -*- codecs: utf-8 -*-
 import FreeCADGui
 import FreeCAD
 import Part,PartGui 
@@ -15,6 +14,7 @@ class Box():
 				'ToolTip' : "box"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		cube = Part.makeBox(2, 2, 2)
 		Part.show(cube)
 		cube = Part.makeBox(3, 3, 4)

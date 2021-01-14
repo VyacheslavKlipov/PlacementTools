@@ -1,10 +1,10 @@
-# -*- codecs: utf-8 -*-
 import FreeCADGui
 import FreeCAD
 import Part,PartGui 
 from PySide import QtGui
 from Common import ICONPATH
 from Common import GetSelectedUpperObjects
+import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 
@@ -66,6 +66,18 @@ class PointToPoint():
 	#              'MenuText': "Allign Left",
 				'ToolTip' : "Точка к точке"}
 
+	def RotationCorrect(self,obj,point):
+		uobj=Common.getParent(obj)
+		if uobj!=obj:
+#			obj.InList.__len__()>0:
+#			FreeCAD.Console.PrintMessage(uobj.Label)
+#			FreeCAD.Console.PrintMessage('\n')
+			if uobj.TypeId=='PartDesign::Body' or uobj.TypeId=='App::Part' or uobj.TypeId=='App::Link':
+				return self.RotationCorrect(uobj,uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation)).Base)
+			else :
+				return point
+		else:
+			return point
 	def GetSelectedPoint(self,i,j):
 		#FreeCAD.Console.PrintMessage(i)
 		a=FreeCADGui.Selection.getSelectionEx() 
@@ -83,23 +95,24 @@ class PointToPoint():
 
 	def Activated(self,lock=0):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		o=GetSelectedUpperObjects() 
+		o=FreeCADGui.Selection.getSelection() 
+		
 		i=o.__len__()-1
 		if i>=0:
 			if i==0:
-				P2=self.GetSelectedPoint(i,1)
-				P1=self.GetSelectedPoint(i,0)
-				if o[i].TypeId=='PartDesign::Body':
-					P1=o[i].Placement.multiply(FreeCAD.Placement(P1,o[i].Placement.Rotation)).Base
-					P2=o[i].Placement.multiply(FreeCAD.Placement(P2,o[i].Placement.Rotation)).Base
+				P2=self.RotationCorrect(o[i],self.GetSelectedPoint(i,1))
+				P1=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
+#				if o[i].TypeId=='PartDesign::Body':
+#					P1=o[i].Placement.multiply(FreeCAD.Placement(P1,o[i].Placement.Rotation)).Base
+#					P2=o[i].Placement.multiply(FreeCAD.Placement(P2,o[i].Placement.Rotation)).Base
 			else:
-				P2=self.GetSelectedPoint(i,0)
-				if o[i].TypeId=='PartDesign::Body':
-					P2=o[i].Placement.multiply(FreeCAD.Placement(P2,o[i].Placement.Rotation)).Base
+				P2=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
+#				if o[i].TypeId=='PartDesign::Body':
+#					P2=o[i].Placement.multiply(FreeCAD.Placement(P2,o[i].Placement.Rotation)).Base
 				i=i-1
-				P1=self.GetSelectedPoint(i,0)
-				if o[i].TypeId=='PartDesign::Body':
-					P1=o[i].Placement.multiply(FreeCAD.Placement(P1,o[i].Placement.Rotation)).Base
+				P1=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
+#				if o[i].TypeId=='PartDesign::Body':
+#					P1=o[i].Placement.multiply(FreeCAD.Placement(P1,o[i].Placement.Rotation)).Base
 			if lock==1:
 				P1.y=0
 				P2.y=0
@@ -121,7 +134,8 @@ class PointToPoint():
 	#			FreeCAD.Console.PrintMessage("\n")
 	#			FreeCAD.Console.PrintMessage(P2)
 	#			FreeCAD.Console.PrintMessage("\n")
-				o[i].Placement.Base=o[i].Placement.Base+(P2-P1)
+				u=Common.upperObject(o[i])
+				u.Placement.Base=u.Placement.Base+(P2-P1)
 				i=i-1
 		return		
 class PointToPointX():
