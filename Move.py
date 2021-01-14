@@ -16,6 +16,7 @@ class dX():
 				'ToolTip' : "Смещает объект на dX"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","dX")
@@ -32,6 +33,7 @@ class dY():
 				'ToolTip' : "Смещает объект на dY"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","dY")
@@ -48,6 +50,7 @@ class dZ():
 				'ToolTip' : "Смещает объект на dZ"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","dZ")
@@ -79,6 +82,7 @@ class PointToPoint():
 			return d.CenterOfMass
 
 	def Activated(self,lock=0):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		o=GetSelectedUpperObjects() 
 		i=o.__len__()-1
 		if i>=0:

@@ -43,6 +43,7 @@ class rX90():
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси X"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		for obj in objs:
 			Rotate(obj,90,0,0)
@@ -56,6 +57,7 @@ class rY90():
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси Y"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		for obj in objs:
 			Rotate(obj,0,90,0)
@@ -69,6 +71,7 @@ class rZ90():
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси Z"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		for obj in objs:
 			Rotate(obj,0,0,90)
@@ -82,6 +85,7 @@ class rX_90():
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси X"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		for obj in objs:
 			Rotate(obj,-90,0,0)
@@ -95,6 +99,7 @@ class rY_90():
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси Y"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		for obj in objs:
 			Rotate(obj,0,-90,0)
@@ -108,6 +113,7 @@ class rZ_90():
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси Z"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		for obj in objs:
 			Rotate(obj,0,0,-90)
@@ -121,6 +127,7 @@ class rX():
 				'ToolTip' : "Поворачивает объект на r градусов по оси X"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","rX")
@@ -136,6 +143,7 @@ class rY():
 				'ToolTip' : "Поворачивает объект на r градусов по оси Y"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","rY")
@@ -151,6 +159,7 @@ class rZ():
 				'ToolTip' : "Поворачивает объект на r градусов по оси Z"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","rZ")

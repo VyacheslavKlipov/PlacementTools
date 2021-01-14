@@ -43,6 +43,7 @@ class AllignLeft():
 				'ToolTip' : "Выравнивает объекты по левой границе"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			a=objs[objs.__len__()-1].Shape.BoundBox.XMin
@@ -58,6 +59,7 @@ class AllignRight():
 				'ToolTip' : "Выравнивает объекты по правой границе"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			a=objs[objs.__len__()-1].Shape.BoundBox.XMax
@@ -74,6 +76,7 @@ class AllignFront():
 				'ToolTip' : "Выравнивает объекты по передней границе"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			a=objs[objs.__len__()-1].Shape.BoundBox.YMin
@@ -89,6 +92,7 @@ class AllignRear():
 				'ToolTip' : "Выравнивает объекты по задней границе"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			a=objs[objs.__len__()-1].Shape.BoundBox.YMax
@@ -105,6 +109,7 @@ class AllignBottom():
 				'ToolTip' : "Выравнивает объекты по нижней границе"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			a=objs[objs.__len__()-1].Shape.BoundBox.ZMin
@@ -120,6 +125,7 @@ class AllignTop():
 				'ToolTip' : "Выравнивает объекты по верхней границе"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			a=objs[objs.__len__()-1].Shape.BoundBox.ZMax
@@ -135,6 +141,7 @@ class AllignXCenter():
 				'ToolTip' : "Выравнивает объекты по центру оси X"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			i=objs.__len__()-1
@@ -150,6 +157,7 @@ class AllignYCenter():
 				'ToolTip' : "Выравнивает объекты по центру оси Y"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			i=objs.__len__()-1
@@ -165,6 +173,7 @@ class AllignZCenter():
 				'ToolTip' : "Выравнивает объекты по центру оси Z"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			i=objs.__len__()-1
@@ -180,6 +189,7 @@ class RightOf():
 				'ToolTip' : "Располагает объект справа объектa"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
@@ -197,6 +207,7 @@ class LeftOf():
 				'ToolTip' : "Располагает объект слева объектa"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
@@ -215,6 +226,7 @@ class BehindOf():
 				'ToolTip' : "Располагает объект за объектом"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
@@ -232,6 +244,7 @@ class FrontOf():
 				'ToolTip' : "Располагает объект перед объектом"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
@@ -250,6 +263,7 @@ class OverOf():
 				'ToolTip' : "Располагает объект над объектом"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
@@ -267,6 +281,7 @@ class UnderOf():
 				'ToolTip' : "Располагает объект под объектом"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
@@ -285,6 +300,7 @@ class MiddleXOf():
 				'ToolTip' : "Располагает объект между думя объектами по X"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-2
 		if i > 0:
@@ -302,6 +318,7 @@ class MiddleYOf():
 				'ToolTip' : "Располагает объект между думя объектами по Y"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-2
 		if i > 0:
@@ -319,6 +336,7 @@ class MiddleZOf():
 				'ToolTip' : "Располагает объект между думя объектами по Z"}
 
 	def Activated(self):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-2
 		if i > 0:
