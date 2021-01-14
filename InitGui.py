@@ -21,7 +21,7 @@ class PlacementTools (Workbench):
         import Rotation
         self.appendToolbar("Rotation",["rX90","rX_90","rY90","rY_90","rZ90","rZ_90","Separator","rX","rY","rZ"] ) # creates a new toolbar with your commands
 
-        self.appendToolbar("Allign",["Box"]) # creates a new toolbar with your commands
+        #self.appendToolbar("Allign",["Box"]) # creates a new toolbar with your commands
      
   #      self.appendMenu("My New Menu",self.list) # creates a new menu
   #      self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
