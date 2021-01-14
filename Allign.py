@@ -1,3 +1,4 @@
+# -*- codecs: utf-8 -*-
 import FreeCADGui
 import FreeCAD
 import Part,PartGui 

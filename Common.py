@@ -1,3 +1,4 @@
+# -*- codecs: utf-8 -*-
 import FreeCAD,FreeCADGui
 
 import inspect, os.path
