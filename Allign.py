@@ -4,6 +4,7 @@ import Part,PartGui
 from PySide import QtGui
 from Common import ICONPATH
 from Common import GetSelectedUpperObjects
+from Common import GetObjectBoundBox
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 class Box():
@@ -46,9 +47,9 @@ class AllignLeft():
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
-			a=objs[objs.__len__()-1].Shape.BoundBox.XMin
+			a=GetObjectBoundBox(objs[objs.__len__()-1]).XMin
 			for obj in objs:
-				obj.Placement.Base.x=a+(obj.Placement.Base.x-obj.Shape.BoundBox.XMin)
+				obj.Placement.Base.x=a+(obj.Placement.Base.x-GetObjectBoundBox(obj).XMin)
 		return
 		
 class AllignRight():
@@ -62,9 +63,9 @@ class AllignRight():
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
-			a=objs[objs.__len__()-1].Shape.BoundBox.XMax
+			a=GetObjectBoundBox(objs[objs.__len__()-1]).XMax
 			for obj in objs:
-				obj.Placement.Base.x=a-(obj.Shape.BoundBox.XMax-obj.Placement.Base.x)
+				obj.Placement.Base.x=a-(GetObjectBoundBox(obj).XMax-obj.Placement.Base.x)
 				
 		return
 #####################################################################################################3
@@ -79,9 +80,9 @@ class AllignFront():
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
-			a=objs[objs.__len__()-1].Shape.BoundBox.YMin
+			a=GetObjectBoundBox(objs[objs.__len__()-1]).YMin
 			for obj in objs:
-				obj.Placement.Base.y=a+(obj.Placement.Base.y-obj.Shape.BoundBox.YMin)
+				obj.Placement.Base.y=a+(obj.Placement.Base.y-GetObjectBoundBox(obj).YMin)
 		return
 		
 class AllignRear():
@@ -95,9 +96,9 @@ class AllignRear():
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
-			a=objs[objs.__len__()-1].Shape.BoundBox.YMax
+			a=GetObjectBoundBox(objs[objs.__len__()-1]).YMax
 			for obj in objs:
-				obj.Placement.Base.y=a-(obj.Shape.BoundBox.YMax-obj.Placement.Base.y)
+				obj.Placement.Base.y=a-(GetObjectBoundBox(obj).YMax-obj.Placement.Base.y)
 				
 		return
 #####################################################################################################3
@@ -112,9 +113,9 @@ class AllignBottom():
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
-			a=objs[objs.__len__()-1].Shape.BoundBox.ZMin
+			a=GetObjectBoundBox(objs[objs.__len__()-1]).ZMin
 			for obj in objs:
-				obj.Placement.Base.z=a+(obj.Placement.Base.z-obj.Shape.BoundBox.ZMin)
+				obj.Placement.Base.z=a+(obj.Placement.Base.z-GetObjectBoundBox(obj).ZMin)
 		return
 		
 class AllignTop():
@@ -128,9 +129,9 @@ class AllignTop():
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
-			a=objs[objs.__len__()-1].Shape.BoundBox.ZMax
+			a=GetObjectBoundBox(objs[objs.__len__()-1]).ZMax
 			for obj in objs:
-				obj.Placement.Base.z=a-(obj.Shape.BoundBox.ZMax-obj.Placement.Base.z)
+				obj.Placement.Base.z=a-(GetObjectBoundBox(obj).ZMax-obj.Placement.Base.z)
 				
 		return
 class AllignXCenter():
@@ -145,9 +146,11 @@ class AllignXCenter():
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			i=objs.__len__()-1
-			a=objs[i].Shape.BoundBox.XMin+(objs[i].Shape.BoundBox.XMax-objs[i].Shape.BoundBox.XMin)/2.0
+			bb=GetObjectBoundBox(objs[i])
+			a=bb.XMin+(bb.XMax-bb.XMin)/2.0
 			for obj in objs:
-				obj.Placement.Base.x=obj.Placement.Base.x+a-(obj.Shape.BoundBox.XMin+((obj.Shape.BoundBox.XMax-obj.Shape.BoundBox.XMin)/2.0))
+				bb=GetObjectBoundBox(obj)
+				obj.Placement.Base.x=obj.Placement.Base.x+a-(bb.XMin+((bb.XMax-bb.XMin)/2.0))
 		return
 class AllignYCenter():
 	def GetResources(self):
@@ -161,9 +164,11 @@ class AllignYCenter():
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			i=objs.__len__()-1
-			a=objs[i].Shape.BoundBox.YMin+(objs[i].Shape.BoundBox.YMax-objs[i].Shape.BoundBox.YMin)/2.0
+			bb=GetObjectBoundBox(objs[i])
+			a=bb.YMin+(bb.YMax-bb.YMin)/2.0
 			for obj in objs:
-				obj.Placement.Base.y=obj.Placement.Base.y+a-(obj.Shape.BoundBox.YMin+((obj.Shape.BoundBox.YMax-obj.Shape.BoundBox.YMin)/2.0))
+				bb=GetObjectBoundBox(obj)
+				obj.Placement.Base.y=obj.Placement.Base.y+a-(bb.YMin+((bb.YMax-bb.YMin)/2.0))
 		return
 class AllignZCenter():
 	def GetResources(self):
@@ -177,9 +182,11 @@ class AllignZCenter():
 		objs=GetSelectedUpperObjects() 
 		if objs.__len__() > 0:
 			i=objs.__len__()-1
-			a=objs[i].Shape.BoundBox.ZMin+(objs[i].Shape.BoundBox.ZMax-objs[i].Shape.BoundBox.ZMin)/2.0
+			bb=GetObjectBoundBox(objs[i])
+			a=bb.ZMin+(bb.ZMax-bb.ZMin)/2.0
 			for obj in objs:
-				obj.Placement.Base.z=obj.Placement.Base.z+a-(obj.Shape.BoundBox.ZMin+((obj.Shape.BoundBox.ZMax-obj.Shape.BoundBox.ZMin)/2.0))
+				bb=GetObjectBoundBox(obj)
+				obj.Placement.Base.z=obj.Placement.Base.z+a-(bb.ZMin+((bb.ZMax-bb.ZMin)/2.0))
 		return				
 class RightOf():
 	def GetResources(self):
@@ -193,10 +200,10 @@ class RightOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
-			a=objs[i].Shape.BoundBox.XMax
+			a=GetObjectBoundBox(objs[i]).XMax
 			j=0
 			while j<i:
-				objs[j].Placement.Base.x=objs[j].Placement.Base.x+a-objs[j].Shape.BoundBox.XMin
+				objs[j].Placement.Base.x=objs[j].Placement.Base.x+a-GetObjectBoundBox(objs[j]).XMin
 				j=j+1
 		return		
 class LeftOf():
@@ -211,10 +218,10 @@ class LeftOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
-			a=objs[i].Shape.BoundBox.XMin
+			a=GetObjectBoundBox(objs[i]).XMin
 			j=0
 			while j<i:
-				objs[j].Placement.Base.x=objs[j].Placement.Base.x-(objs[j].Shape.BoundBox.XMax-a)
+				objs[j].Placement.Base.x=objs[j].Placement.Base.x-(GetObjectBoundBox(objs[j]).XMax-a)
 				j=j+1
 		return		
 ####################################################################
@@ -230,10 +237,10 @@ class BehindOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
-			a=objs[i].Shape.BoundBox.YMax
+			a=GetObjectBoundBox(objs[i]).YMax
 			j=0
 			while j<i:
-				objs[j].Placement.Base.y=objs[j].Placement.Base.y+a-objs[j].Shape.BoundBox.YMin
+				objs[j].Placement.Base.y=objs[j].Placement.Base.y+a-GetObjectBoundBox(objs[j]).YMin
 				j=j+1
 		return		
 class FrontOf():
@@ -248,10 +255,10 @@ class FrontOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
-			a=objs[i].Shape.BoundBox.YMin
+			a=GetObjectBoundBox(objs[i]).YMin
 			j=0
 			while j<i:
-				objs[j].Placement.Base.y=objs[j].Placement.Base.y-(objs[j].Shape.BoundBox.YMax-a)
+				objs[j].Placement.Base.y=objs[j].Placement.Base.y-(GetObjectBoundBox(objs[j]).YMax-a)
 				j=j+1
 		return		
 ###############3
@@ -267,10 +274,10 @@ class OverOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
-			a=objs[i].Shape.BoundBox.ZMax
+			a=GetObjectBoundBox(objs[i]).ZMax
 			j=0
 			while j<i:
-				objs[j].Placement.Base.z=objs[j].Placement.Base.z+a-objs[j].Shape.BoundBox.ZMin
+				objs[j].Placement.Base.z=objs[j].Placement.Base.z+a-GetObjectBoundBox(objs[j]).ZMin
 				j=j+1
 		return		
 class UnderOf():
@@ -285,10 +292,10 @@ class UnderOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-1
 		if i > 0:
-			a=objs[i].Shape.BoundBox.ZMin
+			a=GetObjectBoundBox(objs[i]).ZMin
 			j=0
 			while j<i:
-				objs[j].Placement.Base.z=objs[j].Placement.Base.z-(objs[j].Shape.BoundBox.ZMax-a)
+				objs[j].Placement.Base.z=objs[j].Placement.Base.z-(GetObjectBoundBox(objs[j]).ZMax-a)
 				j=j+1
 		return		
 				
@@ -304,10 +311,12 @@ class MiddleXOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-2
 		if i > 0:
-			a=(objs[i+1].Shape.BoundBox.XMax-objs[i].Shape.BoundBox.XMin)/2.0+objs[i].Shape.BoundBox.XMin
+			bb=GetObjectBoundBox(objs[i])
+			a=(GetObjectBoundBox(objs[i+1]).XMax-bb.XMin)/2.0+bb.XMin
 			j=0
 			while j<i:
-				objs[j].Placement.Base.x=objs[j].Placement.Base.x+a-(objs[j].Shape.BoundBox.XMin+((objs[j].Shape.BoundBox.XMax-objs[j].Shape.BoundBox.XMin)/2.0))
+				bb=GetObjectBoundBox(objs[j])
+				objs[j].Placement.Base.x=objs[j].Placement.Base.x+a-(bb.XMin+((bb.XMax-bb.XMin)/2.0))
 				j=j+1
 		return		
 class MiddleYOf():
@@ -322,10 +331,12 @@ class MiddleYOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-2
 		if i > 0:
-			a=(objs[i+1].Shape.BoundBox.YMax-objs[i].Shape.BoundBox.YMin)/2.0+objs[i].Shape.BoundBox.YMin
+			bb=GetObjectBoundBox(objs[i])
+			a=(GetObjectBoundBox(objs[i+1]).YMax-bb.YMin)/2.0+bb.YMin
 			j=0
 			while j<i:
-				objs[j].Placement.Base.y=objs[j].Placement.Base.y+a-(objs[j].Shape.BoundBox.YMin+((objs[j].Shape.BoundBox.YMax-objs[j].Shape.BoundBox.YMin)/2.0))
+				bb=GetObjectBoundBox(objs[j])
+				objs[j].Placement.Base.y=objs[j].Placement.Base.y+a-(bb.YMin+((bb.YMax-bb.YMin)/2.0))
 				j=j+1
 		return		
 class MiddleZOf():
@@ -340,10 +351,12 @@ class MiddleZOf():
 		objs=GetSelectedUpperObjects() 
 		i=objs.__len__()-2
 		if i > 0:
-			a=(objs[i+1].Shape.BoundBox.ZMax-objs[i].Shape.BoundBox.ZMin)/2.0+objs[i].Shape.BoundBox.ZMin
+			bb=GetObjectBoundBox(objs[i])
+			a=(GetObjectBoundBox(objs[i+1]).ZMax-bb.ZMin)/2.0+bb.ZMin
 			j=0
 			while j<i:
-				objs[j].Placement.Base.z=objs[j].Placement.Base.z+a-(objs[j].Shape.BoundBox.ZMin+((objs[j].Shape.BoundBox.ZMax-objs[j].Shape.BoundBox.ZMin)/2.0))
+				bb=GetObjectBoundBox(objs[j])
+				objs[j].Placement.Base.z=objs[j].Placement.Base.z+a-(bb.ZMin+((bb.ZMax-bb.ZMin)/2.0))
 				j=j+1
 		return				
 

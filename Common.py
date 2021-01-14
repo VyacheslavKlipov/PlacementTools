@@ -15,7 +15,7 @@ def getParent(obj):
 	for a in obj.InList:
 		for b in a.ViewObject.claimChildren():
 			if b == obj:
-				FreeCAD.Console.PrintMessage('|')
+#				FreeCAD.Console.PrintMessage('|')
 				return a
 	return obj
 
@@ -57,9 +57,9 @@ def getMin(v1,v2):
 	else: 
 		return v2
 
-#	import Common	Common.GetObjectBoundBox(App.ActiveDocument.Part)		
+		
 def GetObjectBoundBox(obj):
-	if obj.TypeId=='App::Part':
+	if not (hasattr(obj,'Shape')) and obj.TypeId=='App::Part':
 		bb=FreeCAD.BoundBox()
 		for subobj in obj.OutList:
 			if subobj.TypeId=='App::Part':
