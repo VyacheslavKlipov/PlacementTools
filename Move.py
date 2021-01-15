@@ -162,6 +162,15 @@ class PointToPointZ():
 	def Activated(self):
 		PointToPoint().Activated(3)
 		return			
+
+class StdMove():
+	def GetResources(self):
+		return {'Pixmap'  : ICONPATH+'StdMove.svg', # the name of a svg file available in the resources
+				'ToolTip' : "Transform"}
+
+	def Activated(self):
+		FreeCADGui.runCommand('Std_TransformManip')
+		return			
 				
 FreeCADGui.addCommand('dX',dX()) 
 FreeCADGui.addCommand('dY',dY()) 
@@ -170,3 +179,4 @@ FreeCADGui.addCommand('PointToPoint',PointToPoint())
 FreeCADGui.addCommand('PointToPointX',PointToPointX()) 
 FreeCADGui.addCommand('PointToPointY',PointToPointY()) 
 FreeCADGui.addCommand('PointToPointZ',PointToPointZ()) 
+FreeCADGui.addCommand('StdMove',StdMove()) 

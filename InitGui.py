@@ -19,8 +19,11 @@ class PlacementTools (Workbench):
         self.appendToolbar("Move",["PointToPoint","PointToPointX","PointToPointY","PointToPointZ","Separator","dX","dY","dZ"] ) # creates a new toolbar with your commands
         import Rotation
         self.appendToolbar("Rotation",["rX90","rX_90","rY90","rY_90","rZ90","rZ_90","Separator","rX","rY","rZ"] ) # creates a new toolbar with your commands
+        import DraftTools
+        self.appendToolbar("Standart",["StdMove","Part_Measure_Linear","Part_Measure_Angular","Draft_Clone"]) # creates a new toolbar with your commands
+
 		
-        #self.appendToolbar("Test",["Box"]) # creates a new toolbar with your commands
+        self.appendToolbar("Test",["Box"]) # creates a new toolbar with your commands
      
   #      self.appendMenu("My New Menu",self.list) # creates a new menu
   #      self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
