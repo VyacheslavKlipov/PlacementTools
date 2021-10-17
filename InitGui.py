@@ -22,7 +22,7 @@ class PlacementTools (Workbench):
         import DraftTools
         self.appendToolbar("Standart",["StdMove","Part_Measure_Linear","Part_Measure_Angular","Draft_Clone"]) # creates a new toolbar with your commands
         import Tools
-        self.appendToolbar("Tools",["Qwery","Box"]) # creates a new toolbar with your commands
+        self.appendToolbar("Tools",["Query","Box"]) # creates a new toolbar with your commands
      
   #      self.appendMenu("My New Menu",self.list) # creates a new menu
   #      self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu

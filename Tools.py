@@ -34,24 +34,26 @@ class Box():
 		#import  InitGui
 		#FreeCADGui.addWorkbench(MyWorkbench())
 
-class Qwery():
+class Query():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'Qwery.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'Query.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-				'ToolTip' : "qwery"}
+				'ToolTip' : "Запросить информацию"}
 
 	def Activated(self):
-		s="не выделенно"
-		d=FreeCADGui.Selection.getSelectionEx()[0].SubObjects[0]
-		if d.ShapeType=='Vertex':
-		   s=d.Point.__str__()	
-		if d.ShapeType=='Edge':
-			if d.Curve.TypeId=='Part::GeomLine':
-				s="Длина "+d.Length.__str__()	
-			else:
-				s="Радиус: "+ d.Curve.Radius.__str__() + "; Диаметр: "+ (d.Curve.Radius*2).__str__()
-		if d.ShapeType=='Face':
-			s="Размеры: X="+ d.BoundBox.XLength.__str__()+"; Y="+ d.BoundBox.YLength.__str__()+"; Z="+ d.BoundBox.ZLength.__str__()
+		try:
+			d=FreeCADGui.Selection.getSelectionEx()[0].SubObjects[0]
+			if d.ShapeType=='Vertex':
+				s=d.Point.__str__()	
+			if d.ShapeType=='Edge':
+				if d.Curve.TypeId=='Part::GeomLine':
+					s="Длина "+d.Length.__str__()	
+				else:
+					s="Радиус: "+ d.Curve.Radius.__str__() + "; Диаметр: "+ (d.Curve.Radius*2).__str__()
+			if d.ShapeType=='Face':
+				s="Размеры: X="+ d.BoundBox.XLength.__str__()+"; Y="+ d.BoundBox.YLength.__str__()+"; Z="+ d.BoundBox.ZLength.__str__()
+		except Exception:
+			s="не выделенно"
 		m = QtGui.QMessageBox()
 		m.setText(s)
 		m.exec_()
@@ -62,7 +64,7 @@ class Qwery():
 
 
 FreeCADGui.addCommand('Box',Box()) 
-FreeCADGui.addCommand('Qwery',Qwery()) 
+FreeCADGui.addCommand('Query',Query()) 
 
 
 
