@@ -1,40 +1,12 @@
 import FreeCADGui
 import FreeCAD
 import Part,PartGui 
-from PySide import QtGui
 from Common import ICONPATH
 from Common import GetSelectedUpperObjects
 from Common import GetObjectBoundBox
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
-class Box():
-	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'temp.svg', # the name of a svg file available in the resources
-	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
-				'ToolTip' : "box"}
 
-	def Activated(self):
-		#FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		cube = Part.makeBox(2, 2, 2)
-		Part.show(cube)
-		cube = Part.makeBox(3, 3, 4)
-		cube.Placement.Base.x =20
-		Part.show(cube)
-		cube = Part.makeCylinder(3,3)
-		cube.Placement.Base.x =50
-		Part.show(cube)
-		return
-
-	def IsActive(self):
-		"""Here you can define if the command must be active or not (greyed) if certain conditions
-		are met or not. This function is optional."""
-		return True
-		#FreeCAD.ActiveDocument.recompute()		
-		
-		#FreeCADGui.removeWorkbench("MyWorkbench")
-		#import  InitGui
-		#FreeCADGui.addWorkbench(MyWorkbench())
 
 class AllignLeft():
 	def GetResources(self):
@@ -361,7 +333,7 @@ class MiddleZOf():
 		return				
 
 
-FreeCADGui.addCommand('Box',Box()) 
+
 FreeCADGui.addCommand('AllignLeft',AllignLeft()) 
 FreeCADGui.addCommand('AllignRight',AllignRight()) 
 FreeCADGui.addCommand('AllignRear',AllignRear()) 
