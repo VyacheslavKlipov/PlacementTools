@@ -1,3 +1,4 @@
+
 import FreeCAD,FreeCADGui
 
 import inspect, os.path
@@ -22,17 +23,19 @@ def getParent(obj):
 def upperObject(obj):
 #	FreeCAD.Console.PrintMessage('[upperObject]')
 	par=getParent(obj)
-	if par!=obj: 
+	#FreeCAD.Console.PrintMessage(par.TypeId)
+	if par==obj or par.TypeId=='App::DocumentObjectGroup': 
 	#obj.InList.__len__()>0:
 		#FreeCAD.Console.PrintMessage('[yes]')
 		#FreeCAD.Console.PrintMessage(obj.Label)
-		return upperObject(par)
+		#FreeCAD.Console.PrintMessage('***\n')
+		return obj 
 		#return upperObject(obj.InList[obj.InList.__len__()-1])
 	else:
 		#FreeCAD.Console.PrintMessage('[no]')
 		#FreeCAD.Console.PrintMessage(obj.Label)
-		#FreeCAD.Console.PrintMessage('\n')
-		return obj
+		#FreeCAD.Console.PrintMessage('***\n')
+		return upperObject(par)
 def GetSelectedUpperObjectsNew():
 	upperobjs=[]
 	objs=FreeCADGui.Selection.getSelection() 

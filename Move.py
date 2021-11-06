@@ -72,7 +72,7 @@ class PointToPoint():
 #			obj.InList.__len__()>0:
 #			FreeCAD.Console.PrintMessage(uobj.Label)
 #			FreeCAD.Console.PrintMessage('\n')
-			if uobj.TypeId=='PartDesign::Body' or uobj.TypeId=='App::Part' or uobj.TypeId=='App::Link':
+			if uobj.TypeId=='PartDesign::Body' or uobj.TypeId=='App::Part' or uobj.TypeId=='App::Link' or par.TypeId=='App::LinkGroup':
 				return self.RotationCorrect(uobj,uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation)).Base)
 			else :
 				return point
