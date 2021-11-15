@@ -13,7 +13,7 @@ ICONPATH = path+'/Resources/icons/'
 
 
 def getParent(obj):
-	for a in obj.InList:
+	for a in obj.InListRecursive:
 		for b in a.ViewObject.claimChildren():
 			if b == obj:
 #				FreeCAD.Console.PrintMessage('|')
@@ -24,17 +24,19 @@ def upperObject(obj):
 #	FreeCAD.Console.PrintMessage('[upperObject]')
 	par=getParent(obj)
 	#FreeCAD.Console.PrintMessage(par.TypeId)
-	if par==obj or par.TypeId=='App::DocumentObjectGroup': 
+	if par==obj or par.TypeId=='App::DocumentObjectGroup' : 
 	#obj.InList.__len__()>0:
-		#FreeCAD.Console.PrintMessage('[yes]')
-		#FreeCAD.Console.PrintMessage(obj.Label)
-		#FreeCAD.Console.PrintMessage('***\n')
+		FreeCAD.Console.PrintMessage('[yes]')
+		FreeCAD.Console.PrintMessage(obj.Label)
+		FreeCAD.Console.PrintMessage(obj.TypeId)
+		FreeCAD.Console.PrintMessage('***\n')
 		return obj 
 		#return upperObject(obj.InList[obj.InList.__len__()-1])
 	else:
-		#FreeCAD.Console.PrintMessage('[no]')
-		#FreeCAD.Console.PrintMessage(obj.Label)
-		#FreeCAD.Console.PrintMessage('***\n')
+		FreeCAD.Console.PrintMessage('[no]')
+		FreeCAD.Console.PrintMessage(par.Label)
+		FreeCAD.Console.PrintMessage(par.TypeId)
+		FreeCAD.Console.PrintMessage('***\n')
 		return upperObject(par)
 def GetSelectedUpperObjectsNew():
 	upperobjs=[]
@@ -44,6 +46,38 @@ def GetSelectedUpperObjectsNew():
 	return upperobjs
 
 def GetSelectedUpperObjects():
+	s=FreeCADGui.Selection.getSelectionEx("",0)
+	upperobjs=[]
+	if s.__len__()>0:
+		if s.__len__()>1:
+			for obj in s:
+				upperobjs.append(obj.Object)
+		else:
+			n=s[0].SubElementNames	
+			j=0
+			cont=n.__len__()>1
+			if not cont:
+				j=j+1
+			while cont:
+				e=n[0].split(".")[j]
+				i=1
+				while i<n.__len__(): 
+					if n[i].split(".")[j]==e:
+						i=i+1
+					else:
+						cont=False
+						i=n.__len__()
+				j=j+1
+			i=0
+			j=j-1
+			while i<n.__len__(): 
+				upperobjs.append(FreeCAD.ActiveDocument.getObject(n[i].split(".")[j]))
+				i=i+1
+#	for o in upperobjs:
+#		FreeCAD.Console.PrintMessage(o.Name)
+#		FreeCAD.Console.PrintMessage('\n')
+	return upperobjs #FreeCADGui.Selection.getSelection("",0) 
+def GetSelectedUpperObjectsOld():
 	upperobjs=[]
 	objs=FreeCADGui.Selection.getSelection() 
 	for obj in objs:

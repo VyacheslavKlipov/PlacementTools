@@ -103,8 +103,7 @@ class AllignTop():
 		if objs.__len__() > 0:
 			a=GetObjectBoundBox(objs[objs.__len__()-1]).ZMax
 			for obj in objs:
-				obj.Placement.Base.z=a-(GetObjectBoundBox(obj).ZMax-obj.Placement.Base.z)
-				
+				obj.Placement.Base.z=a-(GetObjectBoundBox(obj).ZMax-obj.Placement.Base.z)					
 		return
 class AllignXCenter():
 	def GetResources(self):

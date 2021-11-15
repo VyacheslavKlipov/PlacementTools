@@ -72,7 +72,7 @@ class PointToPoint():
 #			obj.InList.__len__()>0:
 #			FreeCAD.Console.PrintMessage(uobj.Label)
 #			FreeCAD.Console.PrintMessage('\n')
-			if uobj.TypeId=='PartDesign::Body' or uobj.TypeId=='App::Part' or uobj.TypeId=='App::Link' or par.TypeId=='App::LinkGroup':
+			if uobj.TypeId=='PartDesign::Body' or uobj.TypeId=='App::Part' or uobj.TypeId=='App::Link' or uobj.TypeId=='App::LinkGroup':
 				return self.RotationCorrect(uobj,uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation)).Base)
 			else :
 				return point
@@ -93,6 +93,7 @@ class PointToPoint():
 		else:
 			return d.CenterOfMass
 
+
 	def Activated(self,lock=0):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		o=FreeCADGui.Selection.getSelection() 
@@ -102,17 +103,11 @@ class PointToPoint():
 			if i==0:
 				P2=self.RotationCorrect(o[i],self.GetSelectedPoint(i,1))
 				P1=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
-#				if o[i].TypeId=='PartDesign::Body':
-#					P1=o[i].Placement.multiply(FreeCAD.Placement(P1,o[i].Placement.Rotation)).Base
-#					P2=o[i].Placement.multiply(FreeCAD.Placement(P2,o[i].Placement.Rotation)).Base
+
 			else:
 				P2=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
-#				if o[i].TypeId=='PartDesign::Body':
-#					P2=o[i].Placement.multiply(FreeCAD.Placement(P2,o[i].Placement.Rotation)).Base
 				i=i-1
 				P1=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
-#				if o[i].TypeId=='PartDesign::Body':
-#					P1=o[i].Placement.multiply(FreeCAD.Placement(P1,o[i].Placement.Rotation)).Base
 			if lock==1:
 				P1.y=0
 				P2.y=0
