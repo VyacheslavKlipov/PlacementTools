@@ -65,133 +65,37 @@ class PointToPoint():
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Allign Left",
 				'ToolTip' : "Точка к точке"}
-
-	def RotationCorrectOld(self,obj,point):
-		uobj=Common.getParent(obj)
-		if uobj!=obj:
-#			obj.InList.__len__()>0:
-#			FreeCAD.Console.PrintMessage(uobj.Label)
-#			FreeCAD.Console.PrintMessage('\n')
-			if uobj.TypeId=='PartDesign::Body' or uobj.TypeId=='App::Part' or uobj.TypeId=='App::Link' or uobj.TypeId=='App::LinkGroup':
-				return self.RotationCorrect(uobj,uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation)).Base)
-			else :
-				return point
-		else:
-			return point
-			
-	def RotationCorrect(self,i,point):
-		a=FreeCADGui.Selection.getSelectionEx("",0)[i].SubElementNames.split(".")
-		u=Common.GetSelectedUpperObjects()[i]
-		j=0
-		while j<a.__len__():
-			if a[j]==u.Name: exit
-			j=j+1
-		f=a.__len__()-2
-		
-		while f>j:
-			uobj=FreeCAD.ActiveDocument.getObject(a[f])
-			FreeCAD.Console.PrintMessage(a[f])
-			FreeCAD.Console.PrintMessage("\n")
-			point = uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation)).Base
-			f=f-1
-		return point
-	def GetSelectedPoint(self,i,j):
-		#FreeCAD.Console.PrintMessage(i)
-		a=FreeCADGui.Selection.getSelectionEx()
-		P=[]
-		b=a[i]
-		c=b.SubObjects
-		if j>(c.__len__()-1):
-			j=c.__len__()-1
-		d=c[j]
-		if d.ShapeType=='Vertex':
-			#FreeCAD.Console.PrintMessage(d.Point)
-			return	d.Point
-		else:
-			return d.CenterOfMass
-	
-	
-
 	def Activated(self,lock=0):
-		Common.test(lock)
-		return		
-def ActivatedOld(self,lock=0):
-		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		o=FreeCADGui.Selection.getSelection() 
-		
-		i=o.__len__()-1
-		if i>=0:
-			if i==0:
-				P2=self.RotationCorrect(i,self.GetSelectedPoint(i,1))
-				P1=self.RotationCorrect(i,self.GetSelectedPoint(i,0))
-
-			else:
-				P2=self.RotationCorrect(i,self.GetSelectedPoint(i,0))
-				i=i-1
-				P1=self.RotationCorrect(i,self.GetSelectedPoint(i,0))
-			if lock==1:
-				P1.y=0
-				P2.y=0
-				P1.z=0
-				P2.z=0
-			if lock==2:
-				P1.x=0
-				P2.x=0
-				P1.z=0
-				P2.z=0
-			if lock==3:
-				P1.y=0
-				P2.y=0
-				P1.x=0
-				P2.x=0
-			while i>=0:
-	#			FreeCAD.Console.PrintMessage("************")
-	#			FreeCAD.Console.PrintMessage(P1)
-	#			FreeCAD.Console.PrintMessage("\n")
-	#			FreeCAD.Console.PrintMessage(P2)
-	#			FreeCAD.Console.PrintMessage("\n")
-				u=Common.upperObject(o[i])
-				u.Placement.Base=u.Placement.Base+(P2-P1)
-				i=i-1
-		return		
-def ActivatedOld(self,lock=0):
-		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		o=FreeCADGui.Selection.getSelection() 
-		
-		i=o.__len__()-1
-		if i>=0:
-			if i==0:
-				P2=self.RotationCorrect(o[i],self.GetSelectedPoint(i,1))
-				P1=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
-
-			else:
-				P2=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
-				i=i-1
-				P1=self.RotationCorrect(o[i],self.GetSelectedPoint(i,0))
-			if lock==1:
-				P1.y=0
-				P2.y=0
-				P1.z=0
-				P2.z=0
-			if lock==2:
-				P1.x=0
-				P2.x=0
-				P1.z=0
-				P2.z=0
-			if lock==3:
-				P1.y=0
-				P2.y=0
-				P1.x=0
-				P2.x=0
-			while i>=0:
-	#			FreeCAD.Console.PrintMessage("************")
-	#			FreeCAD.Console.PrintMessage(P1)
-	#			FreeCAD.Console.PrintMessage("\n")
-	#			FreeCAD.Console.PrintMessage(P2)
-	#			FreeCAD.Console.PrintMessage("\n")
-				u=Common.upperObject(o[i])
-				u.Placement.Base=u.Placement.Base+(P2-P1)
-				i=i-1
+		SelList=Common.getParcedSelectionList()
+		if SelList.__len__()<2: return
+		sel1=SelList[SelList.__len__()-2]
+		sel2=SelList[SelList.__len__()-1]
+		if sel1[sel1.__len__()-1]=="" or sel2[sel2.__len__()-1]=="": return
+		P1=Common.GetSelectedPoint(sel1[sel1.__len__()-2],sel1[sel1.__len__()-1])
+		P1=Common.ResolveTransform(sel1,P1)
+		P2=Common.GetSelectedPoint(sel2[sel2.__len__()-2],sel2[sel2.__len__()-1])
+		P2=Common.ResolveTransform(sel2,P2)
+		if lock==1:
+			P1.y=0
+			P2.y=0
+			P1.z=0
+			P2.z=0
+		if lock==2:
+			P1.x=0
+			P2.x=0
+			P1.z=0
+			P2.z=0
+		if lock==3:
+			P1.y=0
+			P2.y=0
+			P1.x=0
+			P2.x=0
+		u=GetSelectedUpperObjects()
+		i=0
+		FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
+		while i<u.__len__()-1:
+			u[i].Placement.Base=u[i].Placement.Base+(P2-P1)
+			i=i+1
 		return		
 class PointToPointX():
 	def GetResources(self):

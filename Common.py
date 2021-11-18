@@ -15,46 +15,7 @@ ICONPATH = path+'/Resources/icons/'
 #ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
 
 def test(lock=0):
-		SelList=getParcedSelectionList()
-		if SelList.__len__()<2: return
-		FreeCAD.Console.PrintMessage(SelList)
-		FreeCAD.Console.PrintMessage("\n")
-		
-		sel1=SelList[SelList.__len__()-2]
-		sel2=SelList[SelList.__len__()-1]
-		if sel1[sel1.__len__()-1]=="" or sel2[sel2.__len__()-1]=="": return
-		P1=GetSelectedPoint(sel1[sel1.__len__()-2],sel1[sel1.__len__()-1])
-		P1=ResolveTransform(sel1,P1)
-		P2=GetSelectedPoint(sel2[sel2.__len__()-2],sel2[sel2.__len__()-1])
-		P2=ResolveTransform(sel2,P2)
-		FreeCAD.Console.PrintMessage(P1)
-		FreeCAD.Console.PrintMessage("\n")
-		FreeCAD.Console.PrintMessage(P2)
-		FreeCAD.Console.PrintMessage("\n")
-		if lock==1:
-			P1.y=0
-			P2.y=0
-			P1.z=0
-			P2.z=0
-		if lock==2:
-			P1.x=0
-			P2.x=0
-			P1.z=0
-			P2.z=0
-		if lock==3:
-			P1.y=0
-			P2.y=0
-			P1.x=0
-			P2.x=0
-		u=GetSelectedUpperObjects()
-		
-		i=0
-		#FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
-		FreeCAD.ActiveDocument.openTransaction("sf") 
-		while i<u.__len__()-1:
-#			FreeCAD.Console.PrintMessage(u[i].Name)
-			u[i].Placement.Base=u[i].Placement.Base+(P2-P1)
-			i=i+1
+
 		return		
 
 def ResolveTransform (objList,point):
@@ -74,7 +35,6 @@ def getSelectionList():
 		else:
 			lst.append((sel.ObjectName+".").split("."))
 	return lst
-	
 
 def getParcedSelectionList():
 	SelectionList = getSelectionList()
@@ -89,7 +49,6 @@ def getParcedSelectionList():
 				stop=True
 				exit
 		i=i+1
-	FreeCAD.Console.PrintMessage(i)
 	if i>1:		
 		for item in SelectionList:
 			j=i-1
@@ -103,8 +62,6 @@ def getParcedSelectionList():
 
 def GetSelectedUpperObjects():
 	objs=[]
-	FreeCAD.Console.PrintMessage(getParcedSelectionList())
-	FreeCAD.Console.PrintMessage("<<<")
 	for obj in getParcedSelectionList():
 		objs.append(FreeCAD.ActiveDocument.getObject(obj[0]))
 	return objs	
@@ -116,77 +73,7 @@ def GetSelectedPoint(ObjName,ElementName):
 		else:
 			return o.CenterOfMass
 
-def getParent(obj):
-	for a in obj.InListRecursive:
-		for b in a.ViewObject.claimChildren():
-			if b == obj:
-#				FreeCAD.Console.PrintMessage('|')
-				return a
-	return obj
 
-def upperObject(obj):
-#	FreeCAD.Console.PrintMessage('[upperObject]')
-	par=getParent(obj)
-	#FreeCAD.Console.PrintMessage(par.TypeId)
-	if par==obj or par.TypeId=='App::DocumentObjectGroup' : 
-	#obj.InList.__len__()>0:
-		FreeCAD.Console.PrintMessage('[yes]')
-		FreeCAD.Console.PrintMessage(obj.Label)
-		FreeCAD.Console.PrintMessage(obj.TypeId)
-		FreeCAD.Console.PrintMessage('***\n')
-		return obj 
-		#return upperObject(obj.InList[obj.InList.__len__()-1])
-	else:
-		FreeCAD.Console.PrintMessage('[no]')
-		FreeCAD.Console.PrintMessage(par.Label)
-		FreeCAD.Console.PrintMessage(par.TypeId)
-		FreeCAD.Console.PrintMessage('***\n')
-		return upperObject(par)
-def GetSelectedUpperObjectsNew():
-	upperobjs=[]
-	objs=FreeCADGui.Selection.getSelection() 
-	for obj in objs:
-		upperobjs.append(upperObject(obj))
-	return upperobjs
-
-def GetSelectedUpperObjectsOld():
-	s=FreeCADGui.Selection.getSelectionEx("",0)
-	upperobjs=[]
-	if s.__len__()>0:
-		if s.__len__()>1:
-			for obj in s:
-				upperobjs.append(obj.Object)
-		else:
-			n=s[0].SubElementNames	
-			j=0
-			cont=n.__len__()>1
-			if not cont:
-				j=j+1
-			while cont:
-				e=n[0].split(".")[j]
-				i=1
-				while i<n.__len__(): 
-					if n[i].split(".")[j]==e:
-						i=i+1
-					else:
-						cont=False
-						i=n.__len__()
-				j=j+1
-			i=0
-			j=j-1
-			while i<n.__len__(): 
-				upperobjs.append(FreeCAD.ActiveDocument.getObject(n[i].split(".")[j]))
-				i=i+1
-#	for o in upperobjs:
-#		FreeCAD.Console.PrintMessage(o.Name)
-#		FreeCAD.Console.PrintMessage('\n')
-	return upperobjs #FreeCADGui.Selection.getSelection("",0) 
-def GetSelectedUpperObjectsOld1():
-	upperobjs=[]
-	objs=FreeCADGui.Selection.getSelection() 
-	for obj in objs:
-		upperobjs.append(upperObject(obj))
-	return upperobjs
 def getMax(v1,v2):
 	if v1>v2:
 		return v1
