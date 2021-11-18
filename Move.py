@@ -66,7 +66,7 @@ class PointToPoint():
 	#              'MenuText': "Allign Left",
 				'ToolTip' : "Точка к точке"}
 
-	def RotationCorrect(self,obj,point):
+	def RotationCorrectOld(self,obj,point):
 		uobj=Common.getParent(obj)
 		if uobj!=obj:
 #			obj.InList.__len__()>0:
@@ -78,9 +78,26 @@ class PointToPoint():
 				return point
 		else:
 			return point
+			
+	def RotationCorrect(self,i,point):
+		a=FreeCADGui.Selection.getSelectionEx("",0)[i].SubElementNames.split(".")
+		u=Common.GetSelectedUpperObjects()[i]
+		j=0
+		while j<a.__len__():
+			if a[j]==u.Name: exit
+			j=j+1
+		f=a.__len__()-2
+		
+		while f>j:
+			uobj=FreeCAD.ActiveDocument.getObject(a[f])
+			FreeCAD.Console.PrintMessage(a[f])
+			FreeCAD.Console.PrintMessage("\n")
+			point = uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation)).Base
+			f=f-1
+		return point
 	def GetSelectedPoint(self,i,j):
 		#FreeCAD.Console.PrintMessage(i)
-		a=FreeCADGui.Selection.getSelectionEx() 
+		a=FreeCADGui.Selection.getSelectionEx()
 		P=[]
 		b=a[i]
 		c=b.SubObjects
@@ -92,9 +109,52 @@ class PointToPoint():
 			return	d.Point
 		else:
 			return d.CenterOfMass
-
+	
+	
 
 	def Activated(self,lock=0):
+		Common.test(lock)
+		return		
+def ActivatedOld(self,lock=0):
+		FreeCAD.ActiveDocument.openTransaction(self.__str__())
+		o=FreeCADGui.Selection.getSelection() 
+		
+		i=o.__len__()-1
+		if i>=0:
+			if i==0:
+				P2=self.RotationCorrect(i,self.GetSelectedPoint(i,1))
+				P1=self.RotationCorrect(i,self.GetSelectedPoint(i,0))
+
+			else:
+				P2=self.RotationCorrect(i,self.GetSelectedPoint(i,0))
+				i=i-1
+				P1=self.RotationCorrect(i,self.GetSelectedPoint(i,0))
+			if lock==1:
+				P1.y=0
+				P2.y=0
+				P1.z=0
+				P2.z=0
+			if lock==2:
+				P1.x=0
+				P2.x=0
+				P1.z=0
+				P2.z=0
+			if lock==3:
+				P1.y=0
+				P2.y=0
+				P1.x=0
+				P2.x=0
+			while i>=0:
+	#			FreeCAD.Console.PrintMessage("************")
+	#			FreeCAD.Console.PrintMessage(P1)
+	#			FreeCAD.Console.PrintMessage("\n")
+	#			FreeCAD.Console.PrintMessage(P2)
+	#			FreeCAD.Console.PrintMessage("\n")
+				u=Common.upperObject(o[i])
+				u.Placement.Base=u.Placement.Base+(P2-P1)
+				i=i-1
+		return		
+def ActivatedOld(self,lock=0):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		o=FreeCADGui.Selection.getSelection() 
 		
