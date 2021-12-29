@@ -66,15 +66,16 @@ class PointToPoint():
 	#              'MenuText': "Allign Left",
 				'ToolTip' : "Точка к точке"}
 	def Activated(self,lock=0):
-		SelList=Common.getParcedSelectionList()
+		#SelList=Common.getParcedSelectionList()
+		SelList=Common.getSelectionList()
 		if SelList.__len__()<2: return
 		sel1=SelList[SelList.__len__()-2]
 		sel2=SelList[SelList.__len__()-1]
 		if sel1[sel1.__len__()-1]=="" or sel2[sel2.__len__()-1]=="": return
 		P1=Common.GetSelectedPoint(sel1[sel1.__len__()-2],sel1[sel1.__len__()-1])
-		P1=Common.ResolveTransform(sel1,P1)
+		P1=Common.toGlobalCoordinates(sel1,P1)
 		P2=Common.GetSelectedPoint(sel2[sel2.__len__()-2],sel2[sel2.__len__()-1])
-		P2=Common.ResolveTransform(sel2,P2)
+		P2=Common.toGlobalCoordinates(sel2,P2)
 		if lock==1:
 			P1.y=0
 			P2.y=0
@@ -90,11 +91,16 @@ class PointToPoint():
 			P2.y=0
 			P1.x=0
 			P2.x=0
-		u=GetSelectedUpperObjects()
+		#u=GetSelectedUpperObjects()
+		u=FreeCADGui.Selection.getSelection()
 		i=0
 		FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
+		dP = P2-P1
 		while i<u.__len__()-1:
-			u[i].Placement.Base=u[i].Placement.Base+(P2-P1)
+			a=Common.toGlobalCoordinates(SelList[i],u[i].Placement.Base)
+			b=a+dP
+			c=Common.toLocalCoordinates(SelList[i],b)
+			u[i].Placement.Base=c
 			i=i+1
 		return		
 class PointToPointX():
