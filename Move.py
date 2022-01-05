@@ -8,6 +8,7 @@ import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 
+
 class dX():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'dX.svg', # the name of a svg file available in the resources
@@ -66,6 +67,14 @@ class PointToPoint():
 	#              'MenuText': "Allign Left",
 				'ToolTip' : "Точка к точке"}
 	def Activated(self,lock=0):
+		global PTPModeLocal
+		FreeCAD.Console.PrintMessage(PTPModeLocal)
+		if PTPModeLocal: 
+			self.PTPLocal(lock)
+		else:
+			self.PTPGroup(lock)
+		return
+	def PTPLocal(self,lock):
 		#SelList=Common.getParcedSelectionList()
 		SelList=Common.getSelectionList()
 		if SelList.__len__()<2: return
@@ -103,6 +112,39 @@ class PointToPoint():
 			u[i].Placement.Base=c
 			i=i+1
 		return		
+	def PTPGroup(self,lock):
+		SelList=Common.getParcedSelectionList()
+		if SelList.__len__()<2: return
+		sel1=SelList[SelList.__len__()-2]
+		sel2=SelList[SelList.__len__()-1]
+		if sel1[sel1.__len__()-1]=="" or sel2[sel2.__len__()-1]=="": return
+		P1=Common.GetSelectedPoint(sel1[sel1.__len__()-2],sel1[sel1.__len__()-1])
+		P1=Common.toGlobalCoordinates(sel1,P1)
+		P2=Common.GetSelectedPoint(sel2[sel2.__len__()-2],sel2[sel2.__len__()-1])
+		P2=Common.toGlobalCoordinates(sel2,P2)
+		if lock==1:
+			P1.y=0
+			P2.y=0
+			P1.z=0
+			P2.z=0
+		if lock==2:
+			P1.x=0
+			P2.x=0
+			P1.z=0
+			P2.z=0
+		if lock==3:
+			P1.y=0
+			P2.y=0
+			P1.x=0
+			P2.x=0
+		u=GetSelectedUpperObjects()
+		i=0
+		FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
+		dP = P2-P1
+		while i<u.__len__()-1:
+			u[i].Placement.Base=u[i].Placement.Base+dP
+			i=i+1
+		return		
 class PointToPointX():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'PointToPointX.svg', # the name of a svg file available in the resources
@@ -136,7 +178,46 @@ class StdMove():
 	def Activated(self):
 		FreeCADGui.runCommand('Std_TransformManip')
 		return			
-				
+
+
+class PTPModeG:
+    def Activated(self, index):
+        pass
+
+    def GetResources(self):
+        return { 'Pixmap'  : ICONPATH+'G.svg',
+                 'MenuText': 'Учитывать группы'
+                 }
+
+
+class PTPModeL:
+    def Activated(self, index):
+        pass
+        
+    def GetResources(self):
+        return { 'Pixmap'  : ICONPATH+'L.svg',
+                 'MenuText': 'Локальные объекты'}
+
+
+class PTPMode():
+	def GetCommands(self):
+		return ("PTPModeG", "PTPModeL") # a tuple of command names that you want to group
+	def GetResources(self):
+		return {	'ToolTip' : "Local/Group"}
+		
+	def Activated(self,index):
+		global PTPModeLocal
+		PTPModeLocal=not(index==0)
+		FreeCAD.Console.PrintMessage(PTPModeLocal)
+		return	
+	def GetDefaultCommand(self): # return the index of the tuple of the default command. This method is optional and when not implemented '0' is used 
+		return 0
+
+      
+	def IsActive(self): # optional
+		return True
+
+PTPModeLocal = False					
 FreeCADGui.addCommand('dX',dX()) 
 FreeCADGui.addCommand('dY',dY()) 
 FreeCADGui.addCommand('dZ',dZ()) 
@@ -144,4 +225,8 @@ FreeCADGui.addCommand('PointToPoint',PointToPoint())
 FreeCADGui.addCommand('PointToPointX',PointToPointX()) 
 FreeCADGui.addCommand('PointToPointY',PointToPointY()) 
 FreeCADGui.addCommand('PointToPointZ',PointToPointZ()) 
+FreeCADGui.addCommand('PTPModeL',PTPModeL()) 
+FreeCADGui.addCommand('PTPModeG',PTPModeG()) 
+FreeCADGui.addCommand('PTPMode',PTPMode()) 
+
 FreeCADGui.addCommand('StdMove',StdMove()) 

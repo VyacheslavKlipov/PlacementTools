@@ -12,6 +12,7 @@ path     = os.path.dirname(os.path.abspath(filename))
 
 ICONPATH = path+'/Resources/icons/'
 
+
 #ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
 
 def test(lock=0):

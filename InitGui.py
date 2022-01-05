@@ -16,7 +16,7 @@ class PlacementTools (Workbench):
  #       self.list = ["Box","AllignLeft","AllignRight","AllignRear","AllignFront","AllignTop","AllignBottom","Separator","AllignXCenter","AllignYCenter","AllignZCenter","Separator","LeftOf","RightOf","BehindOf","FrontOf","OverOf","UnderOf","Separator","MiddleXOf","MiddleYOf","MiddleZOf"] # A list of command names created in the line above
         self.appendToolbar("Allign",["AllignLeft","AllignRight","AllignRear","AllignFront","AllignTop","AllignBottom","Separator","LeftOf","RightOf","BehindOf","FrontOf","OverOf","UnderOf","Separator","AllignXCenter","AllignYCenter","AllignZCenter","Separator","MiddleXOf","MiddleYOf","MiddleZOf"]) # creates a new toolbar with your commands
         import Move
-        self.appendToolbar("Move",["PointToPoint","PointToPointX","PointToPointY","PointToPointZ","Separator","dX","dY","dZ"] ) # creates a new toolbar with your commands
+        self.appendToolbar("Move",["PTPMode","PointToPoint","PointToPointX","PointToPointY","PointToPointZ","Separator","dX","dY","dZ"] ) # creates a new toolbar with your commands
         import Rotation
         self.appendToolbar("Rotation",["rX90","rX_90","rY90","rY_90","rZ90","rZ_90","Separator","rX","rY","rZ"] ) # creates a new toolbar with your commands
         import DraftTools
