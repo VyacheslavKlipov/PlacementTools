@@ -68,7 +68,7 @@ class PointToPoint():
 				'ToolTip' : "Точка к точке"}
 	def Activated(self,lock=0):
 		global PTPModeLocal
-		FreeCAD.Console.PrintMessage(PTPModeLocal)
+		#FreeCAD.Console.PrintMessage(PTPModeLocal)
 		if PTPModeLocal: 
 			self.PTPLocal(lock)
 		else:
@@ -208,7 +208,7 @@ class PTPMode():
 	def Activated(self,index):
 		global PTPModeLocal
 		PTPModeLocal=not(index==0)
-		FreeCAD.Console.PrintMessage(PTPModeLocal)
+		#FreeCAD.Console.PrintMessage(PTPModeLocal)
 		return	
 	def GetDefaultCommand(self): # return the index of the tuple of the default command. This method is optional and when not implemented '0' is used 
 		return 0

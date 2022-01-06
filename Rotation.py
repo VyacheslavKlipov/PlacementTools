@@ -4,13 +4,23 @@ import Part,PartGui
 from PySide import QtGui
 from Common import ICONPATH
 from Common import GetSelectedUpperObjects
+from Common import GetObjectBoundBox
+
+def testRotate(obj,x,y,z):
+	c=obj.Placement.Rotation.inverted().multVec(GetObjectBoundBox(obj).Center.sub(obj.Placement.Base))
+	if x!=0: obj.Placement.rotate(c,FreeCAD.Vector(1,0,0),x) 
+	if y!=0: obj.Placement.rotate(c,FreeCAD.Vector(0,1,0),y)
+	if z!=0: obj.Placement.rotate(c,FreeCAD.Vector(0,0,1),z)
+	return
 
 def Rotate(obj,x,y,z):
+	c=GetObjectBoundBox(obj).Center
 	a=obj.Placement.Rotation
 	obj.Placement.Rotation=FreeCAD.Rotation(z,y,x)
 	obj.Placement.Rotation=obj.Placement.Rotation.multiply(a)
+	obj.Placement.Base=obj.Placement.Base+c.sub(GetObjectBoundBox(obj).Center)
 	return
-def RotateOld(obj,x,y,z):
+def delRotateOld(obj,x,y,z):
 	a=obj.Placement.Rotation.toEuler()
 	FreeCAD.Console.PrintMessage(a)
 	FreeCAD.Console.PrintMessage('\n')
