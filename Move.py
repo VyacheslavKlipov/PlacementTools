@@ -85,6 +85,10 @@ class PointToPoint():
 		P1=Common.toGlobalCoordinates(sel1,P1)
 		P2=Common.GetSelectedPoint(sel2[sel2.__len__()-2],sel2[sel2.__len__()-1])
 		P2=Common.toGlobalCoordinates(sel2,P2)
+		#FreeCAD.Console.PrintMessage(P1)
+		#FreeCAD.Console.PrintMessage("\n")
+		#FreeCAD.Console.PrintMessage(P2)
+		#FreeCAD.Console.PrintMessage("\n")
 		if lock==1:
 			P1.y=0
 			P2.y=0

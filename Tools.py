@@ -47,11 +47,11 @@ class Query():
 				s=d.Point.__str__()	
 			if d.ShapeType=='Edge':
 				if d.Curve.TypeId=='Part::GeomLine':
-					s="Длина "+d.Length.__str__()	
+					s="Длина "+round(d.Length,2).__str__()	
 				else:
-					s="Радиус: "+ d.Curve.Radius.__str__() + "; Диаметр: "+ (d.Curve.Radius*2).__str__()
+					s="Диаметр: "+ round((d.Curve.Radius*2),2).__str__()
 			if d.ShapeType=='Face':
-				s="Размеры: X="+ d.BoundBox.XLength.__str__()+"; Y="+ d.BoundBox.YLength.__str__()+"; Z="+ d.BoundBox.ZLength.__str__()
+				s="Размеры: X="+ round(d.BoundBox.XLength,2).__str__()+"; Y="+ round(d.BoundBox.YLength,2).__str__()+"; Z="+ round(d.BoundBox.ZLength,2).__str__()
 		except Exception:
 			s="не выделенно"
 		m = QtGui.QMessageBox()

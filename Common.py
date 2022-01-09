@@ -15,36 +15,46 @@ ICONPATH = path+'/Resources/icons/'
 
 #ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
 
+from PySide import QtGui
 def test(lock=0):
-
+		FreeCAD.ActiveDocument.openTransaction("dxbc")
+		objs=GetSelectedLowerObjectsPath()
+		if objs.__len__() > 0:
+			ret=QtGui.QInputDialog.getDouble(None,"","dZ")
+			if ret[1]:
+				for obj in objs:
+					ob=FreeCAD.ActiveDocument.getObject(obj[len(obj)-1])
+					p=toGlobalCoordinates(obj,ob.Placement.Base.z)+ret[0]
+					FreeCAD.Console.PrintMessage(p)
+					ob.Placement.Base.z=toLocalCoordinates(obj,p)
 		return		
 		
 def toGlobalCoordinates (objHierancy,point):
 	i=objHierancy.__len__()-1
 	while i>=0:
 		uobj=FreeCAD.ActiveDocument.getObject(objHierancy[i])
-		if uobj!=None and uobj.hasChildElement():
+		if uobj!=None and hasattr(uobj,'Placement'):
 			point=uobj.Placement.multVec(point)
 			#point=uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation.inverted())).Base
 			#FreeCAD.Console.PrintMessage(i)
 		i=i-1
-	point.x=round(point.x,13)
-	point.y=round(point.y,13)
-	point.z=round(point.z,13)
+	point.x=round(point.x,12)
+	point.y=round(point.y,12)
+	point.z=round(point.z,12)
 	return point	
 def toLocalCoordinates (objHierancy,point):
 	i= 0
 	while i<objHierancy.__len__():
 		dobj=FreeCAD.ActiveDocument.getObject(objHierancy[i])
-		if dobj!=None and dobj.hasChildElement():
+		if dobj!=None and hasattr(dobj,'Placement'):
 			dv=FreeCAD.Vector(point.x-dobj.Placement.Base.x,point.y-dobj.Placement.Base.y,point.z-dobj.Placement.Base.z)
 #			dv=dobj.Placement.inverse().multVec(point)
 			point=dobj.Placement.Rotation.inverted().multVec(dv)
 #			point=dobj.Placement.Rotation.multVec(dv)
 		i=i+1
-	point.x=round(point.x,13)
-	point.y=round(point.y,13)
-	point.z=round(point.z,13)
+	point.x=round(point.x,12)
+	point.y=round(point.y,12)
+	point.z=round(point.z,12)
 	return point	
 
 def DelResolveTransform (objList,point):
@@ -89,10 +99,23 @@ def getParcedSelectionList():
 		return lst
 	else: return SelectionList
 
+
+	
 def GetSelectedUpperObjects():
 	objs=[]
 	for obj in getParcedSelectionList():
 		objs.append(FreeCAD.ActiveDocument.getObject(obj[0]))
+	return objs
+		
+def GetSelectedLowerObjectsPath():
+	objs=[]
+	for sel in getSelectionList():
+		ss=[]
+		for s in sel:
+			obj=FreeCAD.ActiveDocument.getObject(s)
+			if obj!=None: 
+				if len(obj.getSubObjects(1))>0: ss.append(s)
+		objs.append(ss)
 	return objs	
 	
 def GetSelectedPoint(ObjName,ElementName):
