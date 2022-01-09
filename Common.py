@@ -16,18 +16,10 @@ ICONPATH = path+'/Resources/icons/'
 #ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
 
 from PySide import QtGui
+
 def test(lock=0):
-		FreeCAD.ActiveDocument.openTransaction("dxbc")
-		objs=GetSelectedLowerObjectsPath()
-		if objs.__len__() > 0:
-			ret=QtGui.QInputDialog.getDouble(None,"","dZ")
-			if ret[1]:
-				for obj in objs:
-					ob=FreeCAD.ActiveDocument.getObject(obj[len(obj)-1])
-					p=toGlobalCoordinates(obj,ob.Placement.Base.z)+ret[0]
-					FreeCAD.Console.PrintMessage(p)
-					ob.Placement.Base.z=toLocalCoordinates(obj,p)
-		return		
+	return
+
 		
 def toGlobalCoordinates (objHierancy,point):
 	i=objHierancy.__len__()-1

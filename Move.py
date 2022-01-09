@@ -3,11 +3,45 @@ import FreeCAD
 import Part,PartGui 
 from PySide import QtGui
 from Common import ICONPATH
-from Common import GetSelectedUpperObjects
+
 import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
-
+def dMoveG(dx=False,dy=False,dz=False):
+	objs=Common.GetSelectedLowerObjectsPath()
+	msg=""
+	if dx: msg="dX"
+	if dy: msg="dY"
+	if dz: msg="dZ"
+	FreeCAD.ActiveDocument.openTransaction(msg)
+	if objs.__len__() > 0:
+		ret=QtGui.QInputDialog.getDouble(None,"",msg)
+		if ret[1]:
+			for obj in objs:
+				ob=FreeCAD.ActiveDocument.getObject(obj.pop())
+				FreeCAD.Console.PrintMessage(ob)
+				FreeCAD.Console.PrintMessage('\n')
+				p=Common.toGlobalCoordinates(obj,ob.Placement.Base)
+				p.x=p.x+ret[0]*dx
+				p.y=p.y+ret[0]*dy
+				p.z=p.z+ret[0]*dz
+				ob.Placement.Base=Common.toLocalCoordinates(obj,p)
+	return		
+def dMoveL(dx=False,dy=False,dz=False):
+	msg=""
+	if dx: msg="dX"
+	if dy: msg="dY"
+	if dz: msg="dZ"	
+	FreeCAD.ActiveDocument.openTransaction(msg)
+	objs=Common.GetSelectedUpperObjects() 
+	if objs.__len__() > 0:
+		ret=QtGui.QInputDialog.getDouble(None,"","dX")
+		if ret[1]:
+			for obj in objs:
+				obj.Placement.Base.x=obj.Placement.Base.x+ret[0]*dx
+				obj.Placement.Base.y=obj.Placement.Base.y+ret[0]*dy
+				obj.Placement.Base.z=obj.Placement.Base.z+ret[0]*dz
+	return
 
 class dX():
 	def GetResources(self):
@@ -17,15 +51,12 @@ class dX():
 				'ToolTip' : "Смещает объект на dX"}
 
 	def Activated(self):
-		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
-		if objs.__len__() > 0:
-			ret=QtGui.QInputDialog.getDouble(None,"","dX")
-			if ret[1]:
-				for obj in objs:
-					obj.Placement.Base.x=obj.Placement.Base.x+ret[0]
-		return			
-
+		global PTPModeLocal
+		if PTPModeLocal: 
+			dMoveG(True,False,False)
+		else:
+			dMoveL(True,False,False)
+		return
 class dY():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'dY.svg', # the name of a svg file available in the resources
@@ -34,15 +65,12 @@ class dY():
 				'ToolTip' : "Смещает объект на dY"}
 
 	def Activated(self):
-		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
-		if objs.__len__() > 0:
-			ret=QtGui.QInputDialog.getDouble(None,"","dY")
-			if ret[1]:
-				for obj in objs:
-					obj.Placement.Base.y=obj.Placement.Base.y+ret[0]
-		return			
-
+		global PTPModeLocal
+		if PTPModeLocal: 
+			dMoveG(False,True,False)
+		else:
+			dMoveL(False,True,False)
+		return
 class dZ():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'dZ.svg', # the name of a svg file available in the resources
@@ -51,14 +79,12 @@ class dZ():
 				'ToolTip' : "Смещает объект на dZ"}
 
 	def Activated(self):
-		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
-		if objs.__len__() > 0:
-			ret=QtGui.QInputDialog.getDouble(None,"","dZ")
-			if ret[1]:
-				for obj in objs:
-					obj.Placement.Base.z=obj.Placement.Base.z+ret[0]
-		return			
+		global PTPModeLocal
+		if PTPModeLocal: 
+			dMoveG(False,False,True)
+		else:
+			dMoveL(False,False,True)
+		return
 
 class PointToPoint():
 	def GetResources(self):
@@ -141,7 +167,7 @@ class PointToPoint():
 			P2.y=0
 			P1.x=0
 			P2.x=0
-		u=GetSelectedUpperObjects()
+		u=Common.GetSelectedUpperObjects()
 		i=0
 		FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
 		dP = P2-P1
