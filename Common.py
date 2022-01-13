@@ -1,7 +1,9 @@
-
 # from importlib import reload  
 # import Common  
 # reload (Common)
+
+
+from importlib import reload 
 
 import FreeCAD,FreeCADGui
 
@@ -23,9 +25,10 @@ def test(lock=0):
 		
 def toGlobalCoordinates (objHierancy,point):
 	i=objHierancy.__len__()-1
+
 	while i>=0:
 		uobj=FreeCAD.ActiveDocument.getObject(objHierancy[i])
-		if uobj!=None and hasattr(uobj,'Placement'):
+		if uobj!=None and hasattr(uobj,'Placement') and  not uobj.Placement.isIdentity():
 			point=uobj.Placement.multVec(point)
 			#point=uobj.Placement.multiply(FreeCAD.Placement(point,uobj.Placement.Rotation.inverted())).Base
 			#FreeCAD.Console.PrintMessage(i)
@@ -33,12 +36,14 @@ def toGlobalCoordinates (objHierancy,point):
 	point.x=round(point.x,12)
 	point.y=round(point.y,12)
 	point.z=round(point.z,12)
+	FreeCAD.Console.PrintMessage(point)
+	FreeCAD.Console.PrintMessage(' - Global Point\n')
 	return point	
 def toLocalCoordinates (objHierancy,point):
 	i= 0
 	while i<objHierancy.__len__():
 		dobj=FreeCAD.ActiveDocument.getObject(objHierancy[i])
-		if dobj!=None and hasattr(dobj,'Placement'):
+		if dobj!=None and hasattr(dobj,'Placement') and not  dobj.Placement.isIdentity():
 			dv=FreeCAD.Vector(point.x-dobj.Placement.Base.x,point.y-dobj.Placement.Base.y,point.z-dobj.Placement.Base.z)
 #			dv=dobj.Placement.inverse().multVec(point)
 			point=dobj.Placement.Rotation.inverted().multVec(dv)
