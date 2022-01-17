@@ -8,10 +8,10 @@ import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 def PTPLocal(lock):
-		m = QtGui.QMessageBox()
-		m.setText('Это пока толком не работает')
-		m.exec_()
-		return
+		#m = QtGui.QMessageBox()
+		#m.setText('Это пока толком не работает')
+		#m.exec_()
+		#return
 		#SelList=Common.getParcedSelectionList()
 		SelList=Common.getSelectionList()
 		if SelList.__len__()<2: return
@@ -19,8 +19,11 @@ def PTPLocal(lock):
 		sel2=SelList[SelList.__len__()-1]
 		if sel1[sel1.__len__()-1]=="" or sel2[sel2.__len__()-1]=="": return
 		P1=Common.GetSelectedPoint(sel1[sel1.__len__()-2],sel1[sel1.__len__()-1])
-		P1=Common.toGlobalCoordinates(sel1,P1)
 		P2=Common.GetSelectedPoint(sel2[sel2.__len__()-2],sel2[sel2.__len__()-1])
+		for sel in SelList: #удаляю 2 последних
+			sel.pop()
+			sel.pop()
+		P1=Common.toGlobalCoordinates(sel1,P1)
 		P2=Common.toGlobalCoordinates(sel2,P2)
 		#FreeCAD.Console.PrintMessage(P1)
 		#FreeCAD.Console.PrintMessage("\n")
@@ -41,59 +44,49 @@ def PTPLocal(lock):
 			P2.y=0
 			P1.x=0
 			P2.x=0
-		#u=GetSelectedUpperObjects()
 		u=FreeCADGui.Selection.getSelection()
 		i=0
-		FreeCAD.ActiveDocument.openTransaction("Move") 
+		#FreeCAD.ActiveDocument.openTransaction("Move") 
 		dP = P2-P1
 		while i<u.__len__()-1:
 			obj = u[i]
-			pat=[]
 			if hasattr(obj,'_Body'): 
-				n=obj.Name
-				for a in SelList[i]:
-#					FreeCAD.Console.PrintMessage(obj.Name)
-#					FreeCAD.Console.PrintMessage(' - name\n')
-#					FreeCAD.Console.PrintMessage(a)
-#					FreeCAD.Console.PrintMessage(' - a\n')
-					if n==a: 
-						pat.pop()
-						break
-					else: 
-						obj=FreeCAD.ActiveDocument.getObject(a)
-						pat.append(a)
-			else: 
-				pat=SelList[i]
-			FreeCAD.Console.PrintMessage(pat)
-			FreeCAD.Console.PrintMessage(' - pat\n')
-			a=Common.toGlobalCoordinates(pat,obj.Placement.Base)
+				obj=FreeCAD.ActiveDocument.getObject(SelList[i].pop())
+			a=Common.toGlobalCoordinates(SelList[i],obj.Placement.Base)
 			b=a+dP
-			c=Common.toLocalCoordinates(pat,b)
+			c=Common.toLocalCoordinates(SelList[i],b)
 			obj.Placement.Base=c
 			i=i+1
 		return		
 
-def dMoveG(dx=False,dy=False,dz=False):
-	objs=Common.GetSelectedLowerObjectsPath()
+def dMoveL(dx=False,dy=False,dz=False):
+	#objs=Common.GetSelectedLowerObjectsPath()
+	u=FreeCADGui.Selection.getSelection()
+	if len(u)==0: return
 	msg=""
 	if dx: msg="dX"
 	if dy: msg="dY"
 	if dz: msg="dZ"
 	FreeCAD.ActiveDocument.openTransaction(msg)
-	if objs.__len__() > 0:
-		ret=QtGui.QInputDialog.getDouble(None,"",msg)
-		if ret[1]:
-			for obj in objs:
-				ob=FreeCAD.ActiveDocument.getObject(obj.pop())
-				FreeCAD.Console.PrintMessage(ob)
-				FreeCAD.Console.PrintMessage('\n')
-				p=Common.toGlobalCoordinates(obj,ob.Placement.Base)
-				p.x=p.x+ret[0]*dx
-				p.y=p.y+ret[0]*dy
-				p.z=p.z+ret[0]*dz
-				ob.Placement.Base=Common.toLocalCoordinates(obj,p)
+	ret=QtGui.QInputDialog.getDouble(None,"",msg)
+	if ret[1]:
+		i=0
+		SelList=Common.getSelectionList()
+		for sel in SelList: #удаляю 2 последних
+			sel.pop()
+			sel.pop()
+		while i<u.__len__():
+			obj = u[i]
+			if hasattr(obj,'_Body'): 
+				obj=FreeCAD.ActiveDocument.getObject(SelList[i].pop())
+			p=Common.toGlobalCoordinates(SelList[i],obj.Placement.Base)
+			p.x=p.x+ret[0]*dx
+			p.y=p.y+ret[0]*dy
+			p.z=p.z+ret[0]*dz
+			obj.Placement.Base=Common.toLocalCoordinates(SelList[i],p)
+			i=i+1
 	return		
-def dMoveL(dx=False,dy=False,dz=False):
+def dMoveG(dx=False,dy=False,dz=False):
 	msg=""
 	if dx: msg="dX"
 	if dy: msg="dY"
@@ -119,9 +112,9 @@ class dX():
 	def Activated(self):
 		global PTPModeLocal
 		if PTPModeLocal: 
-			dMoveG(True,False,False)
-		else:
 			dMoveL(True,False,False)
+		else:
+			dMoveG(True,False,False)
 		return
 class dY():
 	def GetResources(self):
@@ -133,9 +126,9 @@ class dY():
 	def Activated(self):
 		global PTPModeLocal
 		if PTPModeLocal: 
-			dMoveG(False,True,False)
-		else:
 			dMoveL(False,True,False)
+		else:
+			dMoveG(False,True,False)
 		return
 class dZ():
 	def GetResources(self):
@@ -147,9 +140,9 @@ class dZ():
 	def Activated(self):
 		global PTPModeLocal
 		if PTPModeLocal: 
-			dMoveG(False,False,True)
-		else:
 			dMoveL(False,False,True)
+		else:
+			dMoveG(False,False,True)
 		return
 
 class PointToPoint():
@@ -162,6 +155,7 @@ class PointToPoint():
 		global PTPModeLocal
 		#FreeCAD.Console.PrintMessage(PTPModeLocal)
 		if PTPModeLocal: 
+			FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
 			PTPLocal(lock)
 		else:
 			self.PTPGroup(lock)

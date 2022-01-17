@@ -25,7 +25,6 @@ def test(lock=0):
 		
 def toGlobalCoordinates (objHierancy,point):
 	i=objHierancy.__len__()-1
-
 	while i>=0:
 		uobj=FreeCAD.ActiveDocument.getObject(objHierancy[i])
 		if uobj!=None and hasattr(uobj,'Placement') and  not uobj.Placement.isIdentity():
