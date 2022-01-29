@@ -8,11 +8,11 @@ from Common import GetObjectBoundBox
 
 
 
-class AllignLeft():
+class AlignLeft():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignLeft.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignLeft.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по левой границе"}
 
 	def Activated(self):
@@ -24,11 +24,11 @@ class AllignLeft():
 				obj.Placement.Base.x=a+(obj.Placement.Base.x-GetObjectBoundBox(obj).XMin)
 		return
 		
-class AllignRight():
+class AlignRight():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignRight.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignRight.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по правой границе"}
 
 	def Activated(self):
@@ -41,11 +41,11 @@ class AllignRight():
 				
 		return
 #####################################################################################################3
-class AllignFront():
+class AlignFront():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignFront.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignFront.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по передней границе"}
 
 	def Activated(self):
@@ -57,11 +57,11 @@ class AllignFront():
 				obj.Placement.Base.y=a+(obj.Placement.Base.y-GetObjectBoundBox(obj).YMin)
 		return
 		
-class AllignRear():
+class AlignRear():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignRear.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignRear.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по задней границе"}
 
 	def Activated(self):
@@ -74,11 +74,11 @@ class AllignRear():
 				
 		return
 #####################################################################################################3
-class AllignBottom():
+class AlignBottom():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignBottom.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignBottom.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по нижней границе"}
 
 	def Activated(self):
@@ -90,11 +90,11 @@ class AllignBottom():
 				obj.Placement.Base.z=a+(obj.Placement.Base.z-GetObjectBoundBox(obj).ZMin)
 		return
 		
-class AllignTop():
+class AlignTop():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignTop.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignTop.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по верхней границе"}
 
 	def Activated(self):
@@ -105,11 +105,11 @@ class AllignTop():
 			for obj in objs:
 				obj.Placement.Base.z=a-(GetObjectBoundBox(obj).ZMax-obj.Placement.Base.z)					
 		return
-class AllignXCenter():
+class AlignXCenter():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignXCenter.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignXCenter.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по центру оси X"}
 
 	def Activated(self):
@@ -123,11 +123,11 @@ class AllignXCenter():
 				bb=GetObjectBoundBox(obj)
 				obj.Placement.Base.x=obj.Placement.Base.x+a-(bb.XMin+((bb.XMax-bb.XMin)/2.0))
 		return
-class AllignYCenter():
+class AlignYCenter():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignYCenter.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignYCenter.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по центру оси Y"}
 
 	def Activated(self):
@@ -141,11 +141,11 @@ class AllignYCenter():
 				bb=GetObjectBoundBox(obj)
 				obj.Placement.Base.y=obj.Placement.Base.y+a-(bb.YMin+((bb.YMax-bb.YMin)/2.0))
 		return
-class AllignZCenter():
+class AlignZCenter():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AllignZCenter.svg', # the name of a svg file available in the resources
+		return {'Pixmap'  : ICONPATH+'AlignZCenter.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Выравнивает объекты по центру оси Z"}
 
 	def Activated(self):
@@ -163,7 +163,7 @@ class RightOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'RightOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект справа объектa"}
 
 	def Activated(self):
@@ -181,7 +181,7 @@ class LeftOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'LeftOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект слева объектa"}
 
 	def Activated(self):
@@ -200,7 +200,7 @@ class BehindOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'BehindOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект за объектом"}
 
 	def Activated(self):
@@ -218,7 +218,7 @@ class FrontOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'FrontOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект перед объектом"}
 
 	def Activated(self):
@@ -237,7 +237,7 @@ class OverOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'OverOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект над объектом"}
 
 	def Activated(self):
@@ -255,7 +255,7 @@ class UnderOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'UnderOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект под объектом"}
 
 	def Activated(self):
@@ -274,7 +274,7 @@ class MiddleXOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'MiddleXOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект между думя объектами по X"}
 
 	def Activated(self):
@@ -294,7 +294,7 @@ class MiddleYOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'MiddleYOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект между думя объектами по Y"}
 
 	def Activated(self):
@@ -314,7 +314,7 @@ class MiddleZOf():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'MiddleZOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Располагает объект между думя объектами по Z"}
 
 	def Activated(self):
@@ -333,16 +333,16 @@ class MiddleZOf():
 
 
 
-FreeCADGui.addCommand('AllignLeft',AllignLeft()) 
-FreeCADGui.addCommand('AllignRight',AllignRight()) 
-FreeCADGui.addCommand('AllignRear',AllignRear()) 
-FreeCADGui.addCommand('AllignFront',AllignFront()) 
-FreeCADGui.addCommand('AllignBottom',AllignBottom()) 
-FreeCADGui.addCommand('AllignTop',AllignTop()) 
+FreeCADGui.addCommand('AlignLeft',AlignLeft()) 
+FreeCADGui.addCommand('AlignRight',AlignRight()) 
+FreeCADGui.addCommand('AlignRear',AlignRear()) 
+FreeCADGui.addCommand('AlignFront',AlignFront()) 
+FreeCADGui.addCommand('AlignBottom',AlignBottom()) 
+FreeCADGui.addCommand('AlignTop',AlignTop()) 
 
-FreeCADGui.addCommand('AllignXCenter',AllignXCenter()) 
-FreeCADGui.addCommand('AllignYCenter',AllignYCenter()) 
-FreeCADGui.addCommand('AllignZCenter',AllignZCenter()) 
+FreeCADGui.addCommand('AlignXCenter',AlignXCenter()) 
+FreeCADGui.addCommand('AlignYCenter',AlignYCenter()) 
+FreeCADGui.addCommand('AlignZCenter',AlignZCenter()) 
 
 FreeCADGui.addCommand('RightOf',RightOf()) 
 FreeCADGui.addCommand('LeftOf',LeftOf()) 

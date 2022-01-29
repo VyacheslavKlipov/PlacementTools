@@ -13,7 +13,7 @@
    id="svg2980"
    sodipodi:version="0.32"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="AllignRight.svg"
+   sodipodi:docname="AlignYCenter.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.1">
   <defs
@@ -161,9 +161,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.7706031"
-     inkscape:cx="34.44966"
-     inkscape:cy="28.87063"
-     inkscape:current-layer="g852"
+     inkscape:cx="69.523064"
+     inkscape:cy="25.95298"
+     inkscape:current-layer="g93"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
@@ -224,44 +224,66 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <g
-       id="g852">
+       id="g852" />
+    <g
+       id="g93"
+       transform="rotate(110,30.210455,37.022532)">
+      <g
+         id="g58"
+         transform="translate(0.142597,3.541175)">
+        <path
+           style="fill:none;stroke:#00ff00;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 64,54 H 34 l 12,4"
+           id="path2718"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:none;stroke:#00ff00;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 34,54 c 12,-4 12,-4 12,-4 v 0"
+           id="path2720" />
+      </g>
       <path
          style="fill:none;stroke:#000000;stroke-width:1.92428;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 60,0 V 64"
+         d="m 32.142597,-0.458825 v 64"
          id="path59" />
       <text
          xml:space="preserve"
          style="font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px"
-         x="-35.00349"
-         y="44.759491"
+         x="-36.939743"
+         y="9.9042158"
          id="text930"
-         transform="scale(-1,1)"><tspan
+         transform="rotate(-110)"><tspan
            sodipodi:role="line"
            id="tspan928"
-           x="-35.00349"
-           y="44.759491">X</tspan></text>
-      <path
-         style="fill:none;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 2,60 H 58 L 46,64"
-         id="path2718"
-         sodipodi:nodetypes="ccc" />
-      <path
-         style="fill:none;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 58,60 C 46,56 46,56 46,56 v 0"
-         id="path2720" />
+           x="-36.939743"
+           y="9.9042158">Y</tspan></text>
+      <g
+         id="g64"
+         transform="matrix(-1,0,0,1,64.142597,3.541175)">
+        <path
+           style="fill:none;stroke:#00ff00;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 64,54 H 34 l 12,4"
+           id="path60"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:none;stroke:#00ff00;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 34,54 c 12,-4 12,-4 12,-4 v 0"
+           id="path62" />
+      </g>
       <rect
          style="fill:#cccccc;stroke:#000000;stroke-width:1.5"
          id="rect40"
          width="20"
          height="20"
-         x="40"
-         y="30" />
+         x="-49.541176"
+         y="22.142597"
+         transform="rotate(-90)" />
       <circle
          style="fill:#cccccc;stroke:#000000;stroke-width:1.5"
-         id="path54"
-         cx="50"
-         cy="14"
-         r="10" />
+         id="path65"
+         cx="-14.36772"
+         cy="32.287533"
+         r="10"
+         transform="rotate(-90)" />
     </g>
   </g>
 </svg>
