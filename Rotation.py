@@ -48,7 +48,7 @@ class rX90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rX90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси X"}
 
 	def Activated(self):
@@ -62,7 +62,7 @@ class rY90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rY90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси Y"}
 
 	def Activated(self):
@@ -76,7 +76,7 @@ class rZ90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rZ90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси Z"}
 
 	def Activated(self):
@@ -90,7 +90,7 @@ class rX_90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rX_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси X"}
 
 	def Activated(self):
@@ -104,7 +104,7 @@ class rY_90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rY_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси Y"}
 
 	def Activated(self):
@@ -118,7 +118,7 @@ class rZ_90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rZ_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси Z"}
 
 	def Activated(self):
@@ -132,7 +132,7 @@ class rX():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rX.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на r градусов по оси X"}
 
 	def Activated(self):
@@ -148,7 +148,7 @@ class rY():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rY.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на r градусов по оси Y"}
 
 	def Activated(self):
@@ -164,7 +164,7 @@ class rZ():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rZ.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на r градусов по оси Z"}
 
 	def Activated(self):

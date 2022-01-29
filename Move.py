@@ -106,7 +106,7 @@ class dX():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'dX.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Смещает объект на dX"}
 
 	def Activated(self):
@@ -120,7 +120,7 @@ class dY():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'dY.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Смещает объект на dY"}
 
 	def Activated(self):
@@ -134,7 +134,7 @@ class dZ():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'dZ.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Смещает объект на dZ"}
 
 	def Activated(self):
@@ -149,7 +149,7 @@ class PointToPoint():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'PointToPoint.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Точка к точке"}
 	def Activated(self,lock=0):
 		global PTPModeLocal

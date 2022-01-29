@@ -9,7 +9,7 @@ class Box():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'temp.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "box"}
 
 	def Activated(self):
