@@ -3,6 +3,7 @@ import FreeCAD
 import Part,PartGui 
 from PySide import QtGui
 from Common import ICONPATH
+import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 class Box():
@@ -61,8 +62,45 @@ class Query():
 
 	def IsActive(self):
 		return True
+		
+class PTPModeG:
+    def Activated(self, index):
+        pass
+
+    def GetResources(self):
+        return { 'Pixmap'  : ICONPATH+'G.svg',
+                 'MenuText': 'Учитывать группы'
+                 }
 
 
+class PTPModeL:
+    def Activated(self, index):
+        pass
+        
+    def GetResources(self):
+        return { 'Pixmap'  : ICONPATH+'L.svg',
+                 'MenuText': 'Локальные объекты'}
+
+
+class PTPMode():
+	def GetCommands(self):
+		return ("PTPModeG", "PTPModeL") # a tuple of command names that you want to group
+	def GetResources(self):
+		return {	'ToolTip' : "Local/Group"}
+		
+	def Activated(self,index):
+		Common.localMode=not(index==0)
+		#FreeCAD.Console.PrintMessage(PTPModeLocal)
+		return	
+	def GetDefaultCommand(self): # return the index of the tuple of the default command. This method is optional and when not implemented '0' is used 
+		return 0
+
+      
+	def IsActive(self): # optional
+		return True
+FreeCADGui.addCommand('PTPModeL',PTPModeL()) 
+FreeCADGui.addCommand('PTPModeG',PTPModeG()) 
+FreeCADGui.addCommand('PTPMode',PTPMode()) 
 FreeCADGui.addCommand('Box',Box()) 
 FreeCADGui.addCommand('Query',Query()) 
 

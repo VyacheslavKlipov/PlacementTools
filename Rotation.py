@@ -5,6 +5,7 @@ from PySide import QtGui
 from Common import ICONPATH
 from Common import GetSelectedUpperObjects
 from Common import GetObjectBoundBox
+import Common
 
 def testRotate(obj,x,y,z):
 	c=obj.Placement.Rotation.inverted().multVec(GetObjectBoundBox(obj).Center.sub(obj.Placement.Base))
@@ -12,7 +13,11 @@ def testRotate(obj,x,y,z):
 	if y!=0: obj.Placement.rotate(c,FreeCAD.Vector(0,1,0),y)
 	if z!=0: obj.Placement.rotate(c,FreeCAD.Vector(0,0,1),z)
 	return
-
+def GetRotatingObjects():
+	if Common.localMode: 
+		return Common.GetSelectedLowerObjects()
+	else:
+		return GetSelectedUpperObjects() 
 def Rotate(obj,x,y,z):
 	c=GetObjectBoundBox(obj).Center
 	a=obj.Placement.Rotation
@@ -48,12 +53,12 @@ class rX90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rX90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси X"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects()
 		for obj in objs:
 			Rotate(obj,90,0,0)
 					
@@ -62,12 +67,12 @@ class rY90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rY90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси Y"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects()
 		for obj in objs:
 			Rotate(obj,0,90,0)
 					
@@ -76,12 +81,12 @@ class rZ90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rZ90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на 90 градусов по оси Z"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects() 
 		for obj in objs:
 			Rotate(obj,0,0,90)
 					
@@ -90,54 +95,51 @@ class rX_90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rX_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси X"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects()
 		for obj in objs:
-			Rotate(obj,-90,0,0)
-					
+			Rotate(obj,-90,0,0)			
 		return			
 class rY_90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rY_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси Y"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects() 
 		for obj in objs:
 			Rotate(obj,0,-90,0)
-					
 		return		
 class rZ_90():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rZ_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на -90 градусов по оси Z"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects() 
 		for obj in objs:
 			Rotate(obj,0,0,-90)
-					
 		return		
 class rX():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rX.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на r градусов по оси X"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects() 
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","rX")
 			if ret[1]:
@@ -148,12 +150,12 @@ class rY():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rY.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на r градусов по оси Y"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects()
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","rY")
 			if ret[1]:
@@ -164,12 +166,12 @@ class rZ():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'rZ.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Allign Left",
+	#              'MenuText': "Align Left",
 				'ToolTip' : "Поворачивает объект на r градусов по оси Z"}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
-		objs=GetSelectedUpperObjects() 
+		objs = GetRotatingObjects()
 		if objs.__len__() > 0:
 			ret=QtGui.QInputDialog.getDouble(None,"","rZ")
 			if ret[1]:
