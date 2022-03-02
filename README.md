@@ -43,7 +43,8 @@ Installation using add-ons manager is not yet available
 * Перезапустите Freecad
 
 #### English
-* Download the zip archive (Code->Download ZIP) and extract it. * * Rename the `PlacementTools-master` folder to `PlacementTools`
+* Download the zip archive (Code->Download ZIP) and extract it. 
+* Rename the `PlacementTools-master` folder to `PlacementTools`
 * Place the PlacementTools folder in the Mod folder (For example, for Windows: "c:\Program Files\FreeCAD 0.xx\Mod\").
 * Restart freecad 
 
