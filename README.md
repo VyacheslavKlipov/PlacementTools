@@ -1,17 +1,19 @@
 ### FreeCAD PlacementTools Workbench
 
+#### English
 A FreeCAD workbench that allows one to quickly and easily place objects in 3D space.
 
+#### Russian
+Позволяет быстро и просто разместить объекты в трехмерном пространстве.
 
 [![Quick assembly in FreeCAD](https://img.youtube.com/vi/UEwlEG8g-JM/hqdefault.jpg)](https://youtu.be/UEwlEG8g-JM?list=PLfTREYIFdFHe1eTUVBKYjvOOIleLJiH10)
 
 
-[![Workstation Review Placement Tools](https://img.youtube.com/vi/aeRd-NzHrhI/hqdefault.jpg)](https://www.youtube.com/watch?v=aeRd-NzHrhI&list=PLfTREYIFdFHe1eTUVBKYjvOOIleLJiH10&index=1)
-
 
 ### Usage
-
-Description on how to use workbench. Then link to documentation.
+Video review of the capabilities of the workbench.
+(You can now watch the video with English subtitles)
+[![Workstation Review Placement Tools](https://img.youtube.com/vi/aeRd-NzHrhI/hqdefault.jpg)](https://www.youtube.com/watch?v=aeRd-NzHrhI&list=PLfTREYIFdFHe1eTUVBKYjvOOIleLJiH10&index=1)
 
 ### Install
 
@@ -31,15 +33,14 @@ Installation using add-ons manager is not yet available
 
 <details>
 <summary>Expand for instructions on manual installation</summary>
-#### English
 
+#### English
 * Download the zip archive (Code->Download ZIP) and extract it. * * Rename the `PlacementTools-master` folder to `PlacementTools`
 * Place the PlacementTools folder in the Mod folder (For example, for Windows: "c:\Program Files\FreeCAD 0.xx\Mod\").
 * Restart freecad 
 
 
 #### Russian
-
 * Скачайте zip архив (Code->Download ZIP) и распакуйте его.
 * Переименуйте папку `PlacementTools-master` в  `PlacementTools`.
 * Поместите папку PlacementTools в папку `Mod` (Например, для Windows: `c:\Program Files\FreeCAD 0.xx\Mod\`).
@@ -54,5 +55,4 @@ Please refer to the dedicated [FreeCAD forum thread](https://forum.freecadweb.or
 ### License
 
 
-[LICENSE]
-[GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl.html" rel="nofollow)
+[GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl.html")
