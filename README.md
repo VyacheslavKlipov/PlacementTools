@@ -51,7 +51,8 @@ Installation using add-ons manager is not yet available
 </details>
 
 ### Feedback
-
+<details>
+<summary>Expand for Feedback</summary>
 
 #### Русский
 Обсудить использование верстака, а также задать вопросы или оставить отзыв можно [на форуме](https://forum.freecadweb.org/viewtopic.php?f=20&t=66526) for discussion, questions, feedback. 
@@ -63,4 +64,4 @@ Please refer to the dedicated [FreeCAD forum thread](https://forum.freecadweb.or
 ### License
 
 
-[GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl.html")
+[GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl.html)
