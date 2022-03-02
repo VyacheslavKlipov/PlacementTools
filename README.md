@@ -59,7 +59,7 @@ Installation using add-ons manager is not yet available
 
 #### English
 Please refer to the dedicated [FreeCAD forum thread](https://forum.freecadweb.org/viewtopic.php?f=20&t=66526) for discussion, questions, feedback. 
-
+</details>
 
 ### License
 
