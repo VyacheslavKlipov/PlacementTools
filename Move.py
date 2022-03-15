@@ -7,7 +7,9 @@ from Common import ICONPATH
 import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
-
+translate = FreeCAD.Qt.translate
+def QT_TRANSLATE_NOOP(context, text):
+	return text
 
 def PTPLocal(lock):
 		SelList=Common.getSelectionList()
@@ -168,7 +170,7 @@ class dX():
 		return {'Pixmap'  : ICONPATH+'dX.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Смещает объект на dX"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Moves the selected objects by a distance of  dX")}
 
 	def Activated(self):
 		if Common.localMode: 
@@ -181,7 +183,7 @@ class dY():
 		return {'Pixmap'  : ICONPATH+'dY.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Смещает объект на dY"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Moves the selected objects by a distance of  dY")}
 
 	def Activated(self):
 		if Common.localMode: 
@@ -194,7 +196,7 @@ class dZ():
 		return {'Pixmap'  : ICONPATH+'dZ.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Смещает объект на dZ"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Moves the selected objects by a distance of  dZ")}
 
 	def Activated(self):
 		if Common.localMode: 
@@ -208,7 +210,7 @@ class PointToPoint():
 		return {'Pixmap'  : ICONPATH+'PointToPoint.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Точка к точке"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools', "Point to point tool. Moves the penultimate selected object to the last selected one, aligning the selected points on these objects. Other selected objects will follow the same path as the penultimate one. If an edge is selected instead of a point, then the center of the edge will be taken. If a surface is selected, then its geometric center will be taken.")}
 	def Activated(self,lock=0):
 		if Common.localMode: 
 			FreeCAD.ActiveDocument.openTransaction(self.__str__()) 
@@ -257,7 +259,7 @@ class PointToPoint():
 class PointToPointX():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'PointToPointX.svg', # the name of a svg file available in the resources
-				'ToolTip' : "Точка к точке только по X"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Point to point tool. Moves only on the x-axis")}
 
 	def Activated(self):
 		PointToPoint().Activated(1)
@@ -265,7 +267,7 @@ class PointToPointX():
 class PointToPointY():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'PointToPointY.svg', # the name of a svg file available in the resources
-				'ToolTip' : "Точка к точке только по Y"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Point to point tool. Moves only on the y-axis")}
 
 	def Activated(self):
 		PointToPoint().Activated(2)
@@ -273,7 +275,7 @@ class PointToPointY():
 class PointToPointZ():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'PointToPointZ.svg', # the name of a svg file available in the resources
-				'ToolTip' : "Точка к точке по Z"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Point to point tool. Moves only on the z-axis")}
 
 	def Activated(self):
 		PointToPoint().Activated(3)
@@ -282,7 +284,7 @@ class PointToPointZ():
 class StdMove():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'StdMove.svg', # the name of a svg file available in the resources
-				'ToolTip' : "Transform"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Standart Transform command")}
 
 	def Activated(self):
 		FreeCADGui.runCommand('Std_TransformManip')

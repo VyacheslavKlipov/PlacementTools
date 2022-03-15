@@ -4,6 +4,11 @@ import Part,PartGui
 from PySide import QtGui
 from Common import ICONPATH
 import Common
+
+translate = FreeCAD.Qt.translate
+def QT_TRANSLATE_NOOP(context, text):
+	return text
+	
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 class Box():
@@ -11,7 +16,7 @@ class Box():
 		return {'Pixmap'  : ICONPATH+'temp.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Allign Left",
-				'ToolTip' : "box"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Create test objects")}
 
 	def Activated(self):
 		#FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -39,7 +44,7 @@ class Query():
 	def GetResources(self):
 		return {'Pixmap'  : ICONPATH+'Query.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
-				'ToolTip' : "Запросить информацию"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Request information about the selected element. If an edge is selected, then its length is returned, if a circle, then its diameter, if a point, then its coordinates, if a face, then its dimensions.")}
 
 	def Activated(self):
 		try:
@@ -48,13 +53,13 @@ class Query():
 				s=d.Point.__str__()	
 			if d.ShapeType=='Edge':
 				if d.Curve.TypeId=='Part::GeomLine':
-					s="Длина "+round(d.Length,2).__str__()	
+					s=translate('PlacementTools',"Length ")+round(d.Length,2).__str__()	
 				else:
-					s="Диаметр: "+ round((d.Curve.Radius*2),2).__str__()
+					s=translate('PlacementTools',"Diameter: ")+ round((d.Curve.Radius*2),2).__str__()
 			if d.ShapeType=='Face':
-				s="Размеры: X="+ round(d.BoundBox.XLength,2).__str__()+"; Y="+ round(d.BoundBox.YLength,2).__str__()+"; Z="+ round(d.BoundBox.ZLength,2).__str__()
+				s=translate('PlacementTools',"Dimensions: ")+"X="+ round(d.BoundBox.XLength,2).__str__()+"; Y="+ round(d.BoundBox.YLength,2).__str__()+"; Z="+ round(d.BoundBox.ZLength,2).__str__()
 		except Exception:
-			s="не выделенно"
+			s=translate('PlacementTools',"nothing selected")
 		m = QtGui.QMessageBox()
 		m.setText(s)
 		m.exec_()
@@ -69,7 +74,9 @@ class PTPModeG:
 
     def GetResources(self):
         return { 'Pixmap'  : ICONPATH+'G.svg',
-                 'MenuText': 'Учитывать группы'
+				 'MenuText': QT_TRANSLATE_NOOP('PlacementTools',"With groups"),
+                 'ToolTip': QT_TRANSLATE_NOOP('PlacementTools','If at least one object of a group is selected, then all the tools of this workbench will be applied to the entire group. If all selected objects are within the same group, then all tools of this workbench will be applied only to the selected objects. Groups are objects Part, Link Group, etc.')
+                 
                  }
 
 
@@ -79,14 +86,15 @@ class PTPModeL:
         
     def GetResources(self):
         return { 'Pixmap'  : ICONPATH+'L.svg',
-                 'MenuText': 'Локальные объекты'}
-
+				 'MenuText': QT_TRANSLATE_NOOP('PlacementTools',"Local only"),
+                 'ToolTip': QT_TRANSLATE_NOOP('PlacementTools','All tools of this workbench will be applied to objects locally, regardless of whether they belong to groups. Groups are objects Part, Link Group, etc.')}
+				
 
 class PTPMode():
 	def GetCommands(self):
 		return ("PTPModeG", "PTPModeL") # a tuple of command names that you want to group
 	def GetResources(self):
-		return {	'ToolTip' : "Local/Group"}
+		return {	'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Local/Group")}
 		
 	def Activated(self,index):
 		Common.localMode=not(index==0)

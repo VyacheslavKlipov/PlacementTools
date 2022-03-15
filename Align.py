@@ -1,3 +1,24 @@
+#***************************************************************************
+#*                                                                         *
+#*   Copyright (c) 2022 Vyacheslav Klipov                                  *
+#*                                                                         *
+#*   This program is free software; you can redistribute it and/or modify  *
+#*   it under the terms of the GNU General Public License (GPL)            *
+#*   as published by the Free Software Foundation; either version 3 of     *
+#*   the License, or (at your option) any later version.                   *
+#*   for detail see the LICENCE text file.                                 *
+#*                                                                         *
+#*   This program is distributed in the hope that it will be useful,       *
+#*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+#*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+#*   GNU General Public License for more details.                          *
+#*                                                                         *
+#*   You should have received a copy of the GNU General Public             *
+#*   License along with this program; if not, write to the Free Software   *
+#*   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
+#*   USA                                                                   *
+#*                                                                         *
+#***************************************************************************
 import FreeCADGui
 import FreeCAD
 import Part,PartGui 
@@ -7,14 +28,15 @@ from Common import GetObjectBoundBox
 import Common
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
+translate = FreeCAD.Qt.translate
+def QT_TRANSLATE_NOOP(context, text):
+	return text
 
 
 class AlignLeft():
 	def GetResources(self):
-		return {'Pixmap'  : ICONPATH+'AlignLeft.svg', # the name of a svg file available in the resources
-	#              'Accel' : "Shift+S", # a default shortcut (optional)
-	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по левой границе"}
+		return {'Pixmap'  : ICONPATH+'AlignLeft.svg', 
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the left") }
 
 	
 	def Activated(self):
@@ -43,7 +65,7 @@ class AlignRight():
 		return {'Pixmap'  : ICONPATH+'AlignRight.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по правой границе"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the right")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -71,7 +93,7 @@ class AlignFront():
 		return {'Pixmap'  : ICONPATH+'AlignFront.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по передней границе"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the front")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -99,7 +121,7 @@ class AlignRear():
 		return {'Pixmap'  : ICONPATH+'AlignRear.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по задней границе"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the back")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -128,7 +150,7 @@ class AlignBottom():
 		return {'Pixmap'  : ICONPATH+'AlignBottom.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по нижней границе"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"ВAligns objects to the bottom")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -156,7 +178,7 @@ class AlignTop():
 		return {'Pixmap'  : ICONPATH+'AlignTop.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по верхней границе"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the top")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -183,7 +205,7 @@ class AlignXCenter():
 		return {'Pixmap'  : ICONPATH+'AlignXCenter.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по центру оси X"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the center of the x-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -216,7 +238,7 @@ class AlignYCenter():
 		return {'Pixmap'  : ICONPATH+'AlignYCenter.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по центру оси Y"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the center of the y-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -249,7 +271,7 @@ class AlignZCenter():
 		return {'Pixmap'  : ICONPATH+'AlignZCenter.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Выравнивает объекты по центру оси Z"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the center of the z-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -282,7 +304,7 @@ class RightOf():
 		return {'Pixmap'  : ICONPATH+'RightOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект справа объектa"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools', "Positions objects to the right of the last selected object")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -315,7 +337,7 @@ class LeftOf():
 		return {'Pixmap'  : ICONPATH+'LeftOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект слева объектa"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Positions objects to the left of the last selected object")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -349,7 +371,7 @@ class BehindOf():
 		return {'Pixmap'  : ICONPATH+'BehindOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект за объектом"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Positions objects to the behind of the last selected object")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -382,7 +404,7 @@ class FrontOf():
 		return {'Pixmap'  : ICONPATH+'FrontOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект перед объектом"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Positions objects to the front of the last selected object")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -416,7 +438,7 @@ class OverOf():
 		return {'Pixmap'  : ICONPATH+'OverOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект над объектом"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Positions objects to the over of the last selected object")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -449,7 +471,7 @@ class UnderOf():
 		return {'Pixmap'  : ICONPATH+'UnderOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект под объектом"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Positions objects to the under of the last selected object")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -483,7 +505,7 @@ class MiddleXOf():
 		return {'Pixmap'  : ICONPATH+'MiddleXOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект между думя объектами по X"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Сenters objects between the last two selected objects along the x-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -519,7 +541,7 @@ class MiddleYOf():
 		return {'Pixmap'  : ICONPATH+'MiddleYOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект между думя объектами по Y"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Сenters objects between the last two selected objects along the y-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -555,7 +577,7 @@ class MiddleZOf():
 		return {'Pixmap'  : ICONPATH+'MiddleZOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Располагает объект между думя объектами по Z"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Сenters objects between the last two selected objects along the z-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())

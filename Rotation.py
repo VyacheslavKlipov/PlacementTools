@@ -7,6 +7,10 @@ from Common import GetSelectedUpperObjects
 from Common import GetObjectBoundBox
 import Common
 
+translate = FreeCAD.Qt.translate
+def QT_TRANSLATE_NOOP(context, text):
+	return text
+
 def testRotate(obj,x,y,z):
 	c=obj.Placement.Rotation.inverted().multVec(GetObjectBoundBox(obj).Center.sub(obj.Placement.Base))
 	if x!=0: obj.Placement.rotate(c,FreeCAD.Vector(1,0,0),x) 
@@ -54,7 +58,7 @@ class rX90():
 		return {'Pixmap'  : ICONPATH+'rX90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на 90 градусов по оси X"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects 90 degrees along the x-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -68,7 +72,7 @@ class rY90():
 		return {'Pixmap'  : ICONPATH+'rY90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на 90 градусов по оси Y"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects 90 degrees along the y-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -82,7 +86,7 @@ class rZ90():
 		return {'Pixmap'  : ICONPATH+'rZ90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на 90 градусов по оси Z"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects 90 degrees along the z-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -96,7 +100,7 @@ class rX_90():
 		return {'Pixmap'  : ICONPATH+'rX_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на -90 градусов по оси X"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects -90 degrees along the x-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -109,7 +113,7 @@ class rY_90():
 		return {'Pixmap'  : ICONPATH+'rY_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на -90 градусов по оси Y"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects -90 degrees along the y-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -122,7 +126,7 @@ class rZ_90():
 		return {'Pixmap'  : ICONPATH+'rZ_90.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на -90 градусов по оси Z"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects -90 degrees along the z-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -135,7 +139,7 @@ class rX():
 		return {'Pixmap'  : ICONPATH+'rX.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на r градусов по оси X"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects by r degrees along the x-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -151,7 +155,7 @@ class rY():
 		return {'Pixmap'  : ICONPATH+'rY.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на r градусов по оси Y"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects by r degrees along the y-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -167,7 +171,7 @@ class rZ():
 		return {'Pixmap'  : ICONPATH+'rZ.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : "Поворачивает объект на r градусов по оси Z"}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Rotates objects by r degrees along the z-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())

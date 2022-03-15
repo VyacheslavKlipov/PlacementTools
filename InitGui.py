@@ -1,31 +1,49 @@
-#import os
-#from freecad.workbench_starterkit import ICONPATH
+#***************************************************************************
+#*                                                                         *
+#*   Copyright (c) 2022 Vyacheslav Klipov                                  *
+#*                                                                         *
+#*   This program is free software; you can redistribute it and/or modify  *
+#*   it under the terms of the GNU General Public License (GPL)            *
+#*   as published by the Free Software Foundation; either version 3 of     *
+#*   the License, or (at your option) any later version.                   *
+#*   for detail see the LICENCE text file.                                 *
+#*                                                                         *
+#*   This program is distributed in the hope that it will be useful,       *
+#*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+#*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+#*   GNU General Public License for more details.                          *
+#*                                                                         *
+#*   You should have received a copy of the GNU General Public             *
+#*   License along with this program; if not, write to the Free Software   *
+#*   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
+#*   USA                                                                   *
+#*                                                                         *
+#***************************************************************************
+    
 import Part
 
 
 class PlacementTools (Workbench):
     from Common import ICONPATH
     MenuText = "Placement Tools"
-    ToolTip = "Placement and Align Objects"
-    #Icon = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/Main.svg' 
+    ToolTip = "Placement and align objects"
     Icon = ICONPATH+'Main.svg' 
-
     def Initialize(self):
+        def QT_TRANSLATE_NOOP(scope, text):
+            return text
         """This function is executed when FreeCAD starts"""
-        import Align# import here all the needed files that create your FreeCAD commands
- #       self.list = ["Box","AlignLeft","AlignRight","AlignRear","AlignFront","AlignTop","AlignBottom","Separator","AlignXCenter","AlignYCenter","AlignZCenter","Separator","LeftOf","RightOf","BehindOf","FrontOf","OverOf","UnderOf","Separator","MiddleXOf","MiddleYOf","MiddleZOf"] # A list of command names created in the line above
-        self.appendToolbar("Align",["AlignLeft","AlignRight","AlignRear","AlignFront","AlignTop","AlignBottom","Separator","LeftOf","RightOf","BehindOf","FrontOf","OverOf","UnderOf","Separator","AlignXCenter","AlignYCenter","AlignZCenter","Separator","MiddleXOf","MiddleYOf","MiddleZOf"]) # creates a new toolbar with your commands
+        import Align
+        self.appendToolbar(QT_TRANSLATE_NOOP('PlacementTools',"Align"),["AlignLeft","AlignRight","AlignRear","AlignFront","AlignTop","AlignBottom","Separator","LeftOf","RightOf","BehindOf","FrontOf","OverOf","UnderOf","Separator","AlignXCenter","AlignYCenter","AlignZCenter","Separator","MiddleXOf","MiddleYOf","MiddleZOf"]) # creates a new toolbar with your commands
         import Move
-        self.appendToolbar("Move",["PointToPoint","PointToPointX","PointToPointY","PointToPointZ","Separator","dX","dY","dZ"] ) # creates a new toolbar with your commands
+        self.appendToolbar(QT_TRANSLATE_NOOP('PlacementTools',"Move"),["PointToPoint","PointToPointX","PointToPointY","PointToPointZ","Separator","dX","dY","dZ"] ) 
         import Rotation
-        self.appendToolbar("Rotation",["rX90","rX_90","rY90","rY_90","rZ90","rZ_90","Separator","rX","rY","rZ"] ) # creates a new toolbar with your commands
+        self.appendToolbar(QT_TRANSLATE_NOOP('PlacementTools',"Rotation"),["rX90","rX_90","rY90","rY_90","rZ90","rZ_90","Separator","rX","rY","rZ"] ) 
         import DraftTools
-        self.appendToolbar("Standart",["Part_Measure_Linear","Part_Measure_Angular","Std_LinkMake"]) # creates a new toolbar with your commands
+        self.appendToolbar(QT_TRANSLATE_NOOP('PlacementTools',"Standart"),["Part_Measure_Linear","Part_Measure_Angular","Std_LinkMake"]) 
         import Tools
-        self.appendToolbar("Tools",["PTPMode","Query","Box"]) # creates a new toolbar with your commands
+        self.appendToolbar(QT_TRANSLATE_NOOP('PlacementTools',"Tools"),["PTPMode","Query","Box"]) 
      
-  #      self.appendMenu("My New Menu",self.list) # creates a new menu
-  #      self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
+  
 
     def Activated(self):
         """This function is executed when the workbench is activated"""
@@ -37,11 +55,11 @@ class PlacementTools (Workbench):
 
     def ContextMenu(self, recipient):
         """This is executed whenever the user right-clicks on screen"""
-        # "recipient" will be either "view" or "tree"
-        self.appendContextMenu("My commands",self.list) # add commands to the context menu
+        
+        self.appendContextMenu("My commands",self.list) 
 
     def GetClassName(self): 
-        # this function is mandatory if this is a full python workbench
+        
         return "Gui::PythonWorkbench"
        
 Gui.addWorkbench(PlacementTools()) 
