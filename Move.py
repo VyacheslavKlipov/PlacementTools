@@ -9,7 +9,7 @@ import Common
 
 translate = FreeCAD.Qt.translate
 def QT_TRANSLATE_NOOP(context, text):
-	return text
+	return translate(context, text)
 
 def PTPLocal(lock):
 		SelList=Common.getSelectionList()

@@ -1,0 +1,18 @@
+ 
+/usr/bin/pyside2-lupdate *.py -ts translations/pyfiles.ts
+/usr/bin/lconvert -i translations/pyfiles.ts -o translations/PlacementTools.ts
+read -p "Загрузите файл PlacemantTools.ts на сайт для перевода, переведите его, а затем скачайте zip файл с переводом в папку translations. По завершении нажмите Enter"
+cd translations
+/usr/bin/unzip "PlacementTools (translations).zip"
+cd ..
+for f in translations/*/; 
+do  
+echo $f ; 
+/usr/bin/lrelease $f/PlacementTools.ts
+mv $f/PlacementTools.qm translations/PlacementTools_`/usr/bin/basename $f`.qm
+rm $f/PlacementTools.ts
+rmdir $f
+done
+rm "translations/pyfiles.ts"
+rm "translations/PlacementTools.ts"
+

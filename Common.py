@@ -37,7 +37,7 @@ localMode = False
 #FreeCAD.Console.PrintMessage(path) t
 
 ICONPATH = path+'/Resources/icons/'
-
+LANGUAGEPATH = path+'/translations'
 
 #ICONPATH = FreeCAD.getUserAppDataDir()+'Mod/PlacementTools/Resources/icons/'
 

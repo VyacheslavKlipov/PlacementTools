@@ -30,7 +30,7 @@ import Common
 
 translate = FreeCAD.Qt.translate
 def QT_TRANSLATE_NOOP(context, text):
-	return text
+	return translate(context, text)
 
 
 class AlignLeft():
@@ -150,7 +150,7 @@ class AlignBottom():
 		return {'Pixmap'  : ICONPATH+'AlignBottom.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"ВAligns objects to the bottom")}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Aligns objects to the bottom")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -505,8 +505,8 @@ class MiddleXOf():
 		return {'Pixmap'  : ICONPATH+'MiddleXOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Сenters objects between the last two selected objects along the x-axis")}
-
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Centers objects between the last two selected objects along the x-axis")}
+											
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
 		if Common.localMode: 
@@ -541,7 +541,7 @@ class MiddleYOf():
 		return {'Pixmap'  : ICONPATH+'MiddleYOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Сenters objects between the last two selected objects along the y-axis")}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Centers objects between the last two selected objects along the y-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())
@@ -577,7 +577,7 @@ class MiddleZOf():
 		return {'Pixmap'  : ICONPATH+'MiddleZOf.svg', # the name of a svg file available in the resources
 	#              'Accel' : "Shift+S", # a default shortcut (optional)
 	#              'MenuText': "Align Left",
-				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Сenters objects between the last two selected objects along the z-axis")}
+				'ToolTip' : QT_TRANSLATE_NOOP('PlacementTools',"Centers objects between the last two selected objects along the z-axis")}
 
 	def Activated(self):
 		FreeCAD.ActiveDocument.openTransaction(self.__str__())

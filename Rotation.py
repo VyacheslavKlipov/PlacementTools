@@ -9,7 +9,7 @@ import Common
 
 translate = FreeCAD.Qt.translate
 def QT_TRANSLATE_NOOP(context, text):
-	return text
+	return translate(context, text)
 
 def testRotate(obj,x,y,z):
 	c=obj.Placement.Rotation.inverted().multVec(GetObjectBoundBox(obj).Center.sub(obj.Placement.Base))

@@ -22,15 +22,20 @@
     
 import Part
 
-
+from Common import LANGUAGEPATH
+FreeCADGui.addLanguagePath(LANGUAGEPATH)
 class PlacementTools (Workbench):
     from Common import ICONPATH
+   
     MenuText = "Placement Tools"
     ToolTip = "Placement and align objects"
     Icon = ICONPATH+'Main.svg' 
     def Initialize(self):
         def QT_TRANSLATE_NOOP(scope, text):
             return text
+        from Common import LANGUAGEPATH
+        FreeCADGui.addLanguagePath(LANGUAGEPATH)
+        FreeCAD.Console.PrintMessage(LANGUAGEPATH)
         """This function is executed when FreeCAD starts"""
         import Align
         self.appendToolbar(QT_TRANSLATE_NOOP('PlacementTools',"Align"),["AlignLeft","AlignRight","AlignRear","AlignFront","AlignTop","AlignBottom","Separator","LeftOf","RightOf","BehindOf","FrontOf","OverOf","UnderOf","Separator","AlignXCenter","AlignYCenter","AlignZCenter","Separator","MiddleXOf","MiddleYOf","MiddleZOf"]) # creates a new toolbar with your commands
@@ -61,7 +66,7 @@ class PlacementTools (Workbench):
     def GetClassName(self): 
         
         return "Gui::PythonWorkbench"
-       
+      
 Gui.addWorkbench(PlacementTools()) 
 #Gui.activateWorkbench("PlacementTools")
 

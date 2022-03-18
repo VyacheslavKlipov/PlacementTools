@@ -7,7 +7,7 @@ import Common
 
 translate = FreeCAD.Qt.translate
 def QT_TRANSLATE_NOOP(context, text):
-	return text
+	return translate(context, text)
 	
 #ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
